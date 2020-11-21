@@ -1,15 +1,13 @@
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package proyecto_poo;
 
-/**
- *
- * @author pedro
- */
-public class Infantil {
+
+public class Infantil extends Evento{
+    private int cantidadPersonajes;
+    private int cantidadSorpresas;
+    private String juegos;
+    
+    
     
 }

@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package proyecto_poo;
 
-/**
- *
- * @author pedro
- */
-public class Boda {
-    
+
+public class Boda extends Evento{
+    private String vehiculo;
+    final  String texto ="NO APLICA"; 
 }

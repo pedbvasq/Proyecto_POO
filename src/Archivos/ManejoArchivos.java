@@ -1,17 +1,12 @@
 package Archivos;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+
+
 import java.io.*;
 import java.util.ArrayList;
 
-/**
- *
- * @author Verónica
- */
+
 public class ManejoArchivos {
 
     public static ArrayList<String> LeeFichero(String nombrearchivo) {
@@ -30,7 +25,7 @@ public class ManejoArchivos {
             // Lectura del fichero
             String linea;
             while ((linea = br.readLine()) != null) {
-                System.out.println(linea);
+                
                 lineas.add(linea);
 
             }

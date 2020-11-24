@@ -16,13 +16,14 @@ public class Sistema {
         Sistema main = new Sistema();
 
         main.listaUsuarios(usu);
-        main.saludo();
-        main.ValidacionUsurario();
-        main.menuCliente();
+        main.menu();
+      
     }
-      //selecciona el tipo de usario que ingresa
-    public void ValidacionUsurario() {
-        char tipo;
+  
+
+    public void menu() {
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++\n" + "          BIENVENIDO AL SISTEMA\n" + "++++++++++++++++++++++++++++++++++++++++++++++");
+        
         System.out.println("USUARIO:");
         String usuario = sc.nextLine();
         System.out.println("CONTRASEÑA:");
@@ -31,10 +32,73 @@ public class Sistema {
         for (Usuario i : listaUsuarios(usu)) {
             if (i.getIdUsuario().equals(usuario) && i.getContraseña().equals(contraseña)) {
                 String letra = String.valueOf(i.getTipo());
+                
                 if (letra == "C") {
-                    menuCliente();
+                    String opcion = "";
+                    while (!opcion.equals("3")) {
+                        System.out.println("╔                Menu                       ");
+                        System.out.println("║ 1.Solicitar planificación de evento                   ║");
+                        System.out.println("║ 2. Registrar Pago de evento                  ");
+                        System.out.println("║ 3. Salir         ║");
+                        System.out.print("Ingrese opcion: ");
+                        opcion = sc.nextLine();
+                        switch (opcion) {
+                            case "1":
+                                solicitarPlanificacionDeEvento();
+                                
+                                break;
+                            case "2":
+                                registrarPagoDeEvento();
+                                
+                                break;
+                            case "3":
+                                opcion = "3";
+                                break;
+
+                            default:
+                                System.out.println("Opcion No valida!!");
+                        }
+                    }
+                    sc.close();
+
                 } else {
-                    menuPlanificador();
+                    String opcion = "";
+                    while (!opcion.equals("5")) {
+                        
+                        System.out.println("╔                Menu                       ");
+                        System.out.println("║ 1.Consultar solicitudes pendientes                   ║");
+                        System.out.println("║ 2.Registrar  evento                  ");
+                        System.out.println("║ 3.Confirmar evento         ║");
+                        System.out.println("║ 4.Consultar evento         ║");
+                        System.out.println("║ 5.Salir        ║");
+                        System.out.print("Ingrese opcion: ");
+                        opcion = sc.nextLine();
+                        switch (opcion) {
+                            case "1":
+
+                                consultarSolicitudesPendientes();
+                                break;
+                            case "2":
+                                registrarEvento();
+
+                                break;
+                            case "3":
+                                confirmarEvento();
+
+                                break;
+                            case "4":
+                                consultarEvento();
+
+                                break;
+                            case "5":
+                                opcion = "5";
+                                break;
+
+                            default:
+                                System.out.println("Opcion No valida!!");
+                        }
+                    }
+                    sc.close();
 
                 }
 
@@ -44,84 +108,7 @@ public class Sistema {
 
     }
 
-    //menu del cliente
-    public void menuCliente() {
-        String opcion = "";
-        while (!opcion.equals("3")) {
-            System.out.println("╔                Menu                       ");
-            System.out.println("║ 1.Solicitar planificación de evento                   ║");
-            System.out.println("║ 2. Registrar Pago de evento                  ");
-            System.out.println("║ 3. Salir         ║");
-            System.out.print("Ingrese opcion: ");
-            opcion = sc.nextLine();
-            switch (opcion) {
-                case "1":
-
-                    System.out.println("g");
-                    break;
-                case "2":
-                    System.out.println("8");
-
-                    break;
-                case "3":
-                    opcion = "3";
-                    break;
-
-                default:
-                    System.out.println("Opcion No valida!!");
-            }
-        }
-        sc.close();
-    }
-//Lista de OBJETOS usuarios
-
-
-    //saludo del programa
-    public void saludo() {
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++\n" + "          BIENVENIDO AL SISTEMA\n" + "++++++++++++++++++++++++++++++++++++++++++++++");
-    }
-
-  
-
-    //menu del planificador
-    public void menuPlanificador() {
-        String opcion = "";
-        while (!opcion.equals("5")) {
-            System.out.println("╔                Menu                       ");
-            System.out.println("║ 1.Consultar solicitudes pendientes                   ║");
-            System.out.println("║ 2.Registrar  evento                  ");
-            System.out.println("║ 3.Confirmar evento         ║");
-            System.out.println("║ 4.Consultar evento         ║");
-            System.out.println("║ 5.Salir        ║");
-            System.out.print("Ingrese opcion: ");
-            opcion = sc.nextLine();
-            switch (opcion) {
-                case "1":
-
-                    System.out.println("g");
-                    break;
-                case "2":
-                    System.out.println("8");
-
-                    break;
-                case "3":
-
-                    break;
-                case "4":
-
-                    break;
-                case "5":
-                    opcion = "5";
-                    break;
-
-                default:
-                    System.out.println("Opcion No valida!!");
-            }
-        }
-        sc.close();
-
-    }
-    
+    //LISTA DE USUARIOS
     public ArrayList<Usuario> listaUsuarios(ArrayList<String> a) {
         ArrayList<Usuario> usuarios = new ArrayList<>();
 
@@ -141,5 +128,30 @@ public class Sistema {
         return usuarios;
 
     }
+    
+    public void solicitarPlanificacionDeEvento(){
+        
+    }
+    
+    public void registrarPagoDeEvento(){
+        
+    }
+    
+    public void consultarSolicitudesPendientes(){
+        
+    }
+    
+    public void registrarEvento(){
+        
+    }
+    
+    public void confirmarEvento(){
+        
+    }
+    
+    public void consultarEvento(){
+        
+    }
+    
 
 }

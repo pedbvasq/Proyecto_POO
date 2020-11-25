@@ -10,5 +10,5 @@ package proyecto_poo;
  * @author pedro
  */
 public enum TipoEvento {
-        BODA,NEGOCIOS,INFANTIL
+        BODA,NEGOCIOS,FIESTASINFANTILES
 }

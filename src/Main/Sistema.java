@@ -18,7 +18,8 @@ public class Sistema {
     }
 
     public void menu() {
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++\n" + "          BIENVENIDO AL SISTEMA\n" + "++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++\n"
+                + "          BIENVENIDO AL SISTEMA\n" + "++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("USUARIO:");
         String usuario = sc.nextLine();
         System.out.println("CONTRASEÑA:");
@@ -37,7 +38,9 @@ public class Sistema {
                     opcion = sc.nextLine();
                     switch (opcion) {
                         case "1":
-                            System.out.println("Bienvenido " + usu.validarUsuario(usuario, contraseña).getNombre() + " " + usu.validarUsuario(usuario, contraseña).getApellido());
+                            System.out.println("Bienvenido "
+                                    + usu.validarUsuario(usuario, contraseña).getNombre()
+                                    + " " + usu.validarUsuario(usuario, contraseña).getApellido());
 
                             break;
 

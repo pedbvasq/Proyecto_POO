@@ -8,16 +8,12 @@ public class Sistema {
 
     static Scanner sc = new Scanner(System.in);
     static Usuario usu = new Usuario();
-    static Cliente cli= new Cliente();
 
     public static void main(String[] args) {
         //Llamada menu
         Sistema main = new Sistema();
-        
-        
-      
+
         main.menu();
-        
 
     }
 
@@ -27,10 +23,9 @@ public class Sistema {
         String usuario = sc.nextLine();
         System.out.println("CONTRASEÑA:");
         String contraseña = sc.nextLine();
-       String opcion = "";
-        switch (String.valueOf(usu.validarUsuario(usuario,contraseña).getTipo())) {
-            
-          
+        String opcion = "";
+        switch (String.valueOf(usu.validarUsuario(usuario, contraseña).getTipo())) {
+
             case "C":
 
                 while (!opcion.equals("3")) {
@@ -42,13 +37,11 @@ public class Sistema {
                     opcion = sc.nextLine();
                     switch (opcion) {
                         case "1":
-                            System.out.println("Bienvenido " + usu.validarUsuario(usuario,contraseña).getNombre() +" " +usu.validarUsuario(usuario,contraseña).getApellido() );
-                            cli.menuEvento();
-                           
+                            System.out.println("Bienvenido " + usu.validarUsuario(usuario, contraseña).getNombre() + " " + usu.validarUsuario(usuario, contraseña).getApellido());
+
                             break;
-                            
+
                         case "2":
-                            
 
                             break;
                         case "3":
@@ -62,7 +55,7 @@ public class Sistema {
                 sc.close();
                 break;
             case "P":
-                
+
                 while (!opcion.equals("5")) {
 
                     System.out.println("╔                Menu                       ");
@@ -87,7 +80,7 @@ public class Sistema {
 
                             break;
                         case "5":
-                            opcion= "5";
+                            opcion = "5";
                             break;
 
                         default:
@@ -99,7 +92,6 @@ public class Sistema {
                 break;
             default:
                 System.out.println("Usuario o contraseña No valida!!");
-               
 
         }
 

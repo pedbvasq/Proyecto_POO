@@ -11,8 +11,8 @@ public class Usuario {
     protected String idUsuario;
     protected String contraseña;
     protected char tipo;
-    private Scanner sc = new Scanner(System.in);
-    private ManejoArchivos file = null;
+    static Scanner sc = new Scanner(System.in);
+    static ManejoArchivos file = null;
 
     public Usuario(String nombre, String apellido, String idUsuario, String contraseña, char tipo) {
         this.nombre = nombre;

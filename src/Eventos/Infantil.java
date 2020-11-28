@@ -1,6 +1,6 @@
 
 
-package proyecto_poo;
+package Eventos;
 
 
 public class Infantil extends Evento{

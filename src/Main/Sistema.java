@@ -1,13 +1,12 @@
 package Main;
 
+import Usuarios.Usuario;
 import java.util.Scanner;
-import proyecto_poo.Cliente;
-import proyecto_poo.Usuario;
 
 public class Sistema {
 
     static Scanner sc = new Scanner(System.in);
-    static Usuario usu = new Usuario();
+
 
     public static void main(String[] args) {
         //Llamada menu
@@ -25,7 +24,7 @@ public class Sistema {
         System.out.println("CONTRASEÑA:");
         String contraseña = sc.nextLine();
         String opcion = "";
-        switch (String.valueOf(usu.validarUsuario(usuario, contraseña).getTipo())) {
+        switch (String.valueOf(Usuario.validarUsuario(usuario, contraseña).getTipo())) {
 
             case "C":
 
@@ -39,8 +38,8 @@ public class Sistema {
                     switch (opcion) {
                         case "1":
                             System.out.println("Bienvenido "
-                                    + usu.validarUsuario(usuario, contraseña).getNombre()
-                                    + " " + usu.validarUsuario(usuario, contraseña).getApellido());
+                                    + Usuario.validarUsuario(usuario, contraseña).getNombre()
+                                    + " " + Usuario.validarUsuario(usuario, contraseña).getApellido());
 
                             break;
 

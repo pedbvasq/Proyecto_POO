@@ -1,5 +1,5 @@
 
-package proyecto_poo;
+package Eventos;
 
 
 public class Boda extends Evento{

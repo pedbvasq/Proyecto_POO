@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyecto_poo;
+package Eventos;
 
 /**
  *
  * @author pedro
  */
-public class Pago {
+public enum TipoAdicional {
+    comida,bocaditos,bebida,musica,fotografia
     
 }

@@ -1,4 +1,4 @@
-package proyecto_poo;
+package Usuarios;
 
 import Archivos.ManejoArchivos;
 import java.util.ArrayList;
@@ -10,9 +10,9 @@ public class Usuario {
     protected String apellido;
     protected String idUsuario;
     protected String contraseña;
-    protected char tipo;
+    private char tipo;
     static Scanner sc = new Scanner(System.in);
-    static ManejoArchivos file = null;
+    
 
     public Usuario(String nombre, String apellido, String idUsuario, String contraseña, char tipo) {
         this.nombre = nombre;
@@ -21,9 +21,7 @@ public class Usuario {
         this.contraseña = contraseña;
         this.tipo = tipo;
     }
-     public Usuario() {
-    }
-
+    
     public String getNombre() {
         return nombre;
     }
@@ -64,10 +62,10 @@ public class Usuario {
         this.tipo = tipo;
     }
 
-    public Usuario validarUsuario(String usuario , String contraseña) {
-        ArrayList<String> usu = file.LeeFichero("usuarios.txt");
+    public static Usuario validarUsuario(String usuario , String contraseña) {
+        ArrayList<String> usu = ManejoArchivos.LeeFichero("usuarios.txt");
 
-        for (Usuario i : listaUsuarios(usu)) {
+        for (Usuario i : listaUsuarios()) {
             if (i.getIdUsuario().equals(usuario) && i.getContraseña().equals(contraseña)) {
                 return i;
 
@@ -78,10 +76,11 @@ public class Usuario {
 
     }
 
-    public  ArrayList<Usuario> listaUsuarios(ArrayList<String> a) {
+    public static ArrayList<Usuario> listaUsuarios() {
+        ArrayList<String> clientePlanificador = ManejoArchivos.LeeFichero("usuarios.txt");
         ArrayList<Usuario> usuarios = new ArrayList<>();
 
-        for (String i : a) {
+        for (String i : clientePlanificador) {
             String[] usu = i.split(";");
             String nombre = usu[0];
             String apellido = usu[1];

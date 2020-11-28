@@ -1,4 +1,4 @@
-package proyecto_poo;
+package Usuarios;
 
 import Archivos.ManejoArchivos;
 import static java.lang.Integer.parseInt;
@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Cliente extends Usuario {
@@ -42,11 +43,11 @@ public class Cliente extends Usuario {
 
                     break;
                 case "2":
+                    ValidarTiempo("2");
 
-                   
                     break;
                 case "3":
-                    
+                    ValidarTiempo(3);
 
                     break;
                 case "4":
@@ -62,7 +63,7 @@ public class Cliente extends Usuario {
     }
 
     //validamos la fecha ingresada por el usario, creando la sobrecarga de metodos validarTiempo()
-    public void ValidarTiempo() {
+    private void ValidarTiempo() {
 
         Date condicion;
         Date fechaDate;
@@ -99,12 +100,95 @@ public class Cliente extends Usuario {
 
     }
 
-    public void ValidarTiempo(String fecha) {
+    private void ValidarTiempo(String op) {
+        Date condicion;
+        Date fechaDate;
+        String fecha;
+
+        do {
+            System.out.println("Ingrese fecha(dd/MM/yyyy):");
+            fecha = sc.nextLine();
+            //Se convierte el dato  de string a date
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            fechaDate = null;
+            try {
+                fechaDate = formato.parse(fecha);
+            } catch (ParseException ex) {
+                System.out.println(ex);
+            }
+            //se aumentan 10 meses a la fecha Actual
+
+            Calendar cal = Calendar.getInstance();
+            Date fechaActual = new Date();
+            cal.setTime(fechaActual);
+            cal.add(cal.DATE, 21);
+            condicion = cal.getTime();
+
+            if (fechaDate.after(condicion)) {
+                System.out.println("Fecha del evento :" + fecha);
+                System.out.println("Fecha valida!!");
+            } else {
+                System.out.println(" Fecha del evento :" + fecha);
+                System.out.println("La fecha es muy proxima.Para este tipo de evento debemos tener\n" + "por lo menos 3 semanas para planficar ingrese nuevamente.");
+            }
+
+        } while (fechaDate.after(condicion) == false);
 
     }
 
-    public void ValidarTiempo(int fecha) {
+    private void ValidarTiempo(int op) {
+        Date condicion;
+        Date fechaDate;
+        String fecha;
+
+        do {
+            System.out.println("Ingrese fecha(dd/MM/yyyy):");
+            fecha = sc.nextLine();
+            //Se convierte el dato  de string a date
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            fechaDate = null;
+            try {
+                fechaDate = formato.parse(fecha);
+            } catch (ParseException ex) {
+                System.out.println(ex);
+            }
+            //se aumentan 10 meses a la fecha Actual
+
+            Calendar cal = Calendar.getInstance();
+            Date fechaActual = new Date();
+            cal.setTime(fechaActual);
+            cal.add(cal.MONTH, 2);
+            condicion = cal.getTime();
+
+            if (fechaDate.after(condicion)) {
+                System.out.println("Fecha del evento :" + fecha);
+                System.out.println("Fecha valida!!");
+            } else {
+                System.out.println(" Fecha del evento :" + fecha);
+                System.out.println("La fecha es muy proxima.Para este tipo de evento debemos tener\n" + "por lo menos 2 meses para planficar ingrese nuevamente.");
+            }
+
+        } while (fechaDate.after(condicion) == false);
+
 
     }
-
+    private Usuario elegirPlanificador(){
+       
+        ArrayList<Usuario> usuarios = listaUsuarios();
+         double aleatorio=0;
+         for(Usuario i : usuarios){ 
+             if(String.valueOf(i.getTipo()).equals("P")){
+                 aleatorio = Math.random()*usuarios.size();
+                 Usuario user = usuarios.get((int) aleatorio);
+                 return user;
+                 
+             }
+        }
+        return null;
+    }
+    
+    public void crearSolicitud(String opcion){
+        
+    }
+   
 }

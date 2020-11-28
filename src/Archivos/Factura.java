@@ -1,5 +1,5 @@
 
-package proyecto_poo;
+package Archivos;
 
 
 public class Factura {

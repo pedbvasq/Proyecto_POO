@@ -12,12 +12,17 @@ import java.util.Scanner;
  */
 public class Planificador extends Usuario {
     
-    ArrayList<Solicitud> solicitudes = new ArrayList<>();
-       solicitudes = ManejoArchivos.LeeFichero("solicitudes.txt");
-    public solicitud ConsultarSolicitudesPendientes(){
-       
-       for (Solicitud i:solicitudes){
-           return i;
+    public Solicitud ConsultarSolicitudesPendientes(){
+       ArrayList<String> soli = ManejoArchivos.LeeFichero("solicitudes.txt"); 
+       ArrayList<Solicitud> solicitudes = new ArrayList<>();
+       for (String i:soli){
+           String[] sol=i.split(",");
+           int id=sol[0];
+           String cliente = sol[1];
+           String planificador=sol[2];
+           Date fecha= sol[3];
+           
+           return null;
        }
        return null;
     }

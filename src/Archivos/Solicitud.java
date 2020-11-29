@@ -75,7 +75,7 @@ public class Solicitud {
     
 
     private Usuario elegirPlanificador() {
-
+        ArrayList<String> usu = ManejoArchivos.LeeFichero("usuarios.txt");
         ArrayList<Usuario> usuarios = Usuario.listaUsuarios();
         double aleatorio = 0;
         for (Usuario i : usuarios) {

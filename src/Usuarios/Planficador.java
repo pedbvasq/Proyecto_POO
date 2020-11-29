@@ -36,12 +36,12 @@ public class Planificador extends Usuario {
         for (solicitud i: solicitudes){
             if (id == solicitud.getId()){
                 System.out.println("DATOS");
-                System.out.println("CLIENTE: "+solicitud.getCliente());
+                System.out.println("CLIENTE: "+i.getCliente());
                 System.out.println("PLANIFICADOR ASIGNADO: "+this.getNombre());
-                System.out.println("FECHA DE REGISTRO: "+Solicitud.getFechaRegistro());
-                System.out.println("TIPO: "+solicitud.getTipo());
-                System.out.println("FECHA DEL EVENTO: "+solicitud.getFecha());
-                System.out.println("PRECIO BASE: "+solicitud.getTarifa());
+                System.out.println("FECHA DE REGISTRO: "+i.getFechaRegistro());
+                System.out.println("TIPO: "+i.getTipo());
+                System.out.println("FECHA DEL EVENTO: "+i.getFecha());
+                System.out.println("PRECIO BASE: "+i.getTarifa());
             }
         }
     }

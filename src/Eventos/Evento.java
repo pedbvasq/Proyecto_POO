@@ -1,5 +1,7 @@
 
 package Eventos;
+import Usuarios.Cliente;
+import Usuarios.Planificador;
 import java.util.Date;
 import java.util.Random;
 import java.util.stream.IntStream;

@@ -11,19 +11,39 @@ public class Solicitud {
 
     private int idSolicitud;
     private Cliente cliente;
-    private Planficador user;
-
-    
+    private Planificador user;
+    private Date fechaSolicitud;
     private Date fechaEvento;
     private Estado estado;
-    ArrayList<Solicitud> solicitudes = new ArrayList<>();
-    
-    public Solicitud(int idSolicitud, Cliente cliente, Date fechaEvento, Estado estado) {
+    public static ArrayList<Solicitud> solicitudes = new ArrayList<>();
+
+    public Date getFechaSolicitud() {
+        return fechaSolicitud;
+    }
+
+    public void setFechaSolicitud(Date fechaSolicitud) {
+        this.fechaSolicitud = fechaSolicitud;
+    }
+
+    public Solicitud(int idSolicitud, Cliente cliente, Planificador user,Date fechaSolicitud ,Date fechaEvento) {
         this.idSolicitud = idSolicitud;
         this.cliente = cliente;
+        this.user = user;
+         this.fechaSolicitud=fechaSolicitud;
+        this.fechaEvento = fechaEvento;
+        this.estado = estado.PENDIENTE;
+    }
+    public Solicitud(int idSolicitud, Cliente cliente, Planificador user,Date fechaSolicitud , Date fechaEvento,Estado estado) {
+        this.idSolicitud = idSolicitud;
+        this.cliente = cliente;
+        this.user = user;
+        this.fechaSolicitud=fechaSolicitud;
         this.fechaEvento = fechaEvento;
         this.estado = estado;
     }
+    
+   
+    
 
     public int getIdSolicitud() {
         return idSolicitud;
@@ -41,11 +61,11 @@ public class Solicitud {
         this.cliente = cliente;
     }
 
-    public Planficador getUser() {
+    public Planificador getUser() {
         return user;
     }
 
-    public void setUser(Planficador user) {
+    public void setUser(Planificador user) {
         this.user = user;
     }
 
@@ -74,15 +94,16 @@ public class Solicitud {
     }
     
 
-    private Usuario elegirPlanificador() {
+    public static Planificador elegirPlanificador() {
         ArrayList<String> usu = ManejoArchivos.LeeFichero("usuarios.txt");
-        ArrayList<Usuario> usuarios = Usuario.listaUsuarios(usu);
+        ArrayList<Usuario> usuarios = Usuario.listaUsuarios();
         double aleatorio = 0;
         for (Usuario i : usuarios) {
             if (String.valueOf(i.getTipo()).equals("P")) {
                 aleatorio = Math.random() * usuarios.size();
                 Usuario user = usuarios.get((int) aleatorio);
-                return user;
+                Planificador p =new Planificador(user.getNombre(),user.getApellido(),user.getIdUsuario(),user.getContraseña(),user.getTipo());
+                return p;
 
             }
         }

@@ -9,6 +9,7 @@ package Eventos;
  *
  * @author pedro
  */
-public enum TipoEvento {
-        BODA,EMPRESARIAL,INFANTIL
+public enum EstadoEvento {
+    CONFIRMADO,PENDIENTE
+    
 }

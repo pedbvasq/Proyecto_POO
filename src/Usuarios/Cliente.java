@@ -1,6 +1,8 @@
 package Usuarios;
 
 import Archivos.ManejoArchivos;
+import Archivos.Solicitud;
+import Eventos.TipoEvento;
 import static java.lang.Integer.parseInt;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,6 +21,7 @@ public class Cliente extends Usuario {
     private ManejoArchivos file = null;
     private ArrayList<String> usu = file.LeeFichero("clientes.txt");
     GregorianCalendar calend = new GregorianCalendar();
+    static TipoEvento e;
 
     public Cliente(String telefono, String correo, String nombre, String apellido, String idUsuario, String contraseña, char tipo) {
         super(nombre, apellido, idUsuario, contraseña, tipo);
@@ -29,6 +32,8 @@ public class Cliente extends Usuario {
     public void solicitarPlanificacionDeEvento() {
         String opcion = "";
         String fecha;
+        String opcion1;
+
         while (!opcion.equals("4")) {
             System.out.println("╔                TIPO DE EVENTO(Elija)                 ");
             System.out.println("║ 1.Boda                  ║");
@@ -39,15 +44,30 @@ public class Cliente extends Usuario {
             opcion = sc.nextLine();
             switch (opcion) {
                 case "1":
-                    ValidarTiempo();
+                    System.out.println("Ingrese fecha(dd/MM/yyyy):");
+                    fecha = sc.nextLine();
+                    CondicionEvento(fecha);
+                    System.out.println("Ingrese fecha(dd/MM/yyyy):");
+                    opcion1 = sc.nextLine();
+                    crearSolicitud(opcion1, fecha);
 
                     break;
                 case "2":
-                    ValidarTiempo("2");
+                    System.out.println("Ingrese fecha(dd/MM/yyyy):");
+                    fecha = sc.nextLine();
+                    CondicionEvento(fecha);
+                    System.out.println("Ingrese fecha(dd/MM/yyyy):");
+                    opcion1 = sc.nextLine();
+                    crearSolicitud(opcion1, fecha);
 
                     break;
                 case "3":
-                    ValidarTiempo(3);
+                    System.out.println("Ingrese fecha(dd/MM/yyyy):");
+                    fecha = sc.nextLine();
+                    CondicionEvento(fecha);
+                    System.out.println("Ingrese fecha(dd/MM/yyyy):");
+                    opcion1 = sc.nextLine();
+                    crearSolicitud(opcion1, fecha);
 
                     break;
                 case "4":
@@ -62,133 +82,103 @@ public class Cliente extends Usuario {
         sc.close();
     }
 
-    //validamos la fecha ingresada por el usario, creando la sobrecarga de metodos validarTiempo()
-    private void ValidarTiempo() {
+    private void CondicionEvento(String fecha) {
 
-        Date condicion;
-        Date fechaDate;
-        String fecha;
-
+        Date fechaActual = new Date();
         do {
-            System.out.println("Ingrese fecha(dd/MM/yyyy):");
-            fecha = sc.nextLine();
-            //Se convierte el dato  de string a date
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-            fechaDate = null;
-            try {
-                fechaDate = formato.parse(fecha);
-            } catch (ParseException ex) {
-                System.out.println(ex);
-            }
-            //se aumentan 10 meses a la fecha Actual
-
-            Calendar cal = Calendar.getInstance();
-            Date fechaActual = new Date();
-            cal.setTime(fechaActual);
-            cal.add(cal.MONTH, 10);
-            condicion = cal.getTime();
-
-            if (fechaDate.after(condicion)) {
+            if (fechaActual.after(validarTiempo(fecha))) {
                 System.out.println("Fecha del evento :" + fecha);
                 System.out.println("Fecha valida!!");
+
             } else {
                 System.out.println(" Fecha del evento :" + fecha);
-                System.out.println("La fecha es muy proxima.Para este tipo de evento debemos tener\n" + "por lo menos 10 meses para planficar ingrese nuevamente.");
+                System.out.println("La fecha es muy proxima.Para este tipo de evento debemos tener\n" + "por lo menos 10 meses  para planficar ingrese nuevamente.");
             }
-
-        } while (fechaDate.after(condicion) == false);
-
-    }
-
-    private void ValidarTiempo(String op) {
-        Date condicion;
-        Date fechaDate;
-        String fecha;
-
-        do {
-            System.out.println("Ingrese fecha(dd/MM/yyyy):");
-            fecha = sc.nextLine();
-            //Se convierte el dato  de string a date
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-            fechaDate = null;
-            try {
-                fechaDate = formato.parse(fecha);
-            } catch (ParseException ex) {
-                System.out.println(ex);
-            }
-            //se aumentan 10 meses a la fecha Actual
-
-            Calendar cal = Calendar.getInstance();
-            Date fechaActual = new Date();
-            cal.setTime(fechaActual);
-            cal.add(cal.DATE, 21);
-            condicion = cal.getTime();
-
-            if (fechaDate.after(condicion)) {
-                System.out.println("Fecha del evento :" + fecha);
-                System.out.println("Fecha valida!!");
-            } else {
+            if (fechaActual.after(validarTiempo(fecha))) {
                 System.out.println(" Fecha del evento :" + fecha);
+
+            } else {
                 System.out.println("La fecha es muy proxima.Para este tipo de evento debemos tener\n" + "por lo menos 3 semanas para planficar ingrese nuevamente.");
+
             }
-
-        } while (fechaDate.after(condicion) == false);
-
-    }
-
-    private void ValidarTiempo(int op) {
-        Date condicion;
-        Date fechaDate;
-        String fecha;
-
-        do {
-            System.out.println("Ingrese fecha(dd/MM/yyyy):");
-            fecha = sc.nextLine();
-            //Se convierte el dato  de string a date
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-            fechaDate = null;
-            try {
-                fechaDate = formato.parse(fecha);
-            } catch (ParseException ex) {
-                System.out.println(ex);
-            }
-            //se aumentan 10 meses a la fecha Actual
-
-            Calendar cal = Calendar.getInstance();
-            Date fechaActual = new Date();
-            cal.setTime(fechaActual);
-            cal.add(cal.MONTH, 2);
-            condicion = cal.getTime();
-
-            if (fechaDate.after(condicion)) {
+            if (fechaActual.after(validarTiempo(fecha))) {
                 System.out.println("Fecha del evento :" + fecha);
                 System.out.println("Fecha valida!!");
+
             } else {
-                System.out.println(" Fecha del evento :" + fecha);
                 System.out.println("La fecha es muy proxima.Para este tipo de evento debemos tener\n" + "por lo menos 2 meses para planficar ingrese nuevamente.");
+
             }
 
-        } while (fechaDate.after(condicion) == false);
-
-
+        } while (fechaActual.after(validarTiempo(fecha)) == false);
     }
-    private Usuario elegirPlanificador(){
-       
-        ArrayList<Usuario> usuarios = listaUsuarios();
-         double aleatorio=0;
-         for(Usuario i : usuarios){ 
-             if(String.valueOf(i.getTipo()).equals("P")){
-                 aleatorio = Math.random()*usuarios.size();
-                 Usuario user = usuarios.get((int) aleatorio);
-                 return user;
-                 
-             }
+
+
+
+    private static Date validarTiempo(String fecha) {
+        Date condicion;
+        Date fechaActual = new Date();
+        Calendar cal = Calendar.getInstance();
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(fecha);
+        } catch (ParseException ex) {
+            System.out.println(ex);
+        }
+        //se aumentan 10 meses a la fecha Actual
+        switch (e) {
+            case BODA:
+
+                cal.setTime(fechaActual);
+                cal.add(cal.MONTH, 10);
+                condicion = cal.getTime();
+                return condicion;
+
+            case EMPRESARIAL:
+                cal.setTime(fechaActual);
+                cal.add(cal.MONTH, 10);
+                condicion = cal.getTime();
+                return condicion;
+
+            case INFANTIL:
+                cal.setTime(fechaActual);
+                cal.add(cal.DATE, 2);
+                condicion = cal.getTime();
+                return condicion;
         }
         return null;
+
     }
-    
-    public void crearSolicitud(String opcion){
-        
+
+    public void crearSolicitud(String opcion, String fecha) {
+        Date fechaActual = new Date();
+        if (opcion.startsWith("s") || opcion.startsWith("S")) {
+            int codigo = Solicitud.generarID();
+            Planificador planificador = Solicitud.elegirPlanificador();
+            Solicitud st = new Solicitud(codigo, this, planificador, fechaActual, validarTiempo(fecha));
+            st.getSolicitudes().add(st);
+            String cod = String.valueOf(st.getIdSolicitud());
+            String nameC = this.nombre;
+            String nameP = st.getUser().nombre;
+            String fecha1 = String.valueOf(fechaActual.getDay()) + "/" + String.valueOf(fechaActual.getMonth()) + "/" + String.valueOf(fechaActual.getYear());
+            String total = cod + "," + nameC + "," + nameP + "," + fecha1 + "," + fecha + "," + st.getEstado();
+            ManejoArchivos.EscribirArchivo("solicitudes.txt", total);
+            System.out.print("/********** SOLICITUD REGISTRADA**********/\n" + "/*                                     */\n" + "/***************************************/\n");
+            System.out.println("DATOS");
+            System.out.println("CLIENTE: " + st.getCliente().nombre);
+            System.out.println("PLANIFICADOR ASIGNADO: " + this.getNombre());
+            System.out.println("FECHA DE REGISTRO: " + st.getFechaSolicitud());
+            System.out.println("TIPO: " + st.getEstado());
+            System.out.println("FECHA DEL EVENTO: " + st.getFechaEvento());
+            System.out.println("** se ha registrado su solicitud pronto el planificador se se contactara "
+                    + "con usted por telefono o video conferencia para completar el proceso de recoleccion de datos");
+        } else {
+            System.out.println("Solicitud cancelada");
+
+        }
+
     }
-   
+
 }

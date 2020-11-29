@@ -63,8 +63,7 @@ public class Usuario {
     }
 
     public static Usuario validarUsuario(String usuario , String contraseña) {
-        ArrayList<String> usu = ManejoArchivos.LeeFichero("usuarios.txt");
-
+   
         for (Usuario i : listaUsuarios()) {
             if (i.getIdUsuario().equals(usuario) && i.getContraseña().equals(contraseña)) {
                 return i;

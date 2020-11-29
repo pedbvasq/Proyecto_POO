@@ -97,16 +97,18 @@ public class Evento {
     ArrayList<String> codigos=new ArrayList<>();
     public String generarCodigo(){
         String newCode="";
-        while (!codigos.contains(newCode) && newCode.equals("")){
+        String codigo="";
+        while (!codigos.contains(codigo) && codigo.equals("")){
             Random rd = new Random();
             IntStream code=rd.ints(4,0,10);
             Iterator iterator =code.iterator();
             while(iterator.hasNext()){
                 newCode=iterator.next()+"";
+                codigo=codigo+newCode;            
             }
         }
-        codigos.add(newCode);
-        return newCode;
+        codigos.add(codigo);
+        return codigo;
     }
     
     public void confirmarEvento(){

@@ -1,7 +1,7 @@
 package Archivos;
 
 import Usuarios.Cliente;
-import Usuarios.Planficador;
+import Usuarios.Planificador;
 import Usuarios.Usuario;
 import java.util.ArrayList;
 import java.util.Date;

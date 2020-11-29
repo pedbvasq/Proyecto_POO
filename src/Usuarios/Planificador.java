@@ -1,18 +1,22 @@
 package Usuarios;
 
+import Archivos.Estado;
 import Archivos.ManejoArchivos;
+import Archivos.OrdenDePago;
 import Archivos.Solicitud;
+import Eventos.Evento;
+import Eventos.TipoEvento;
+import static Eventos.TipoEvento.BODA;
+import static Eventos.TipoEvento.EMPRESARIAL;
+import static Eventos.TipoEvento.INFANTIL;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Date;
 
-public class Planificador extends Usuario{
+public class Planificador extends Usuario {
 
     public Planificador(String nombre, String apellido, String idUsuario, String contraseña, char tipo) {
         super(nombre, apellido, idUsuario, contraseña, tipo);
     }
-    
-    
 
     public void ConsultarSolicitudesPendientes() {
         ArrayList<String> solicitudes = ManejoArchivos.LeeFichero("solicitudes.txt");
@@ -28,9 +32,10 @@ public class Planificador extends Usuario{
     }
 
     public void registrarEvento() {
-        System.out.print("/********** REGIRTRO DE EVENTOS**********/\n" + "/*                                     */\n" + "/***************************************/\n");
+        System.out.print("/********** REGIRTRO DE EVENTOS**********/\n" + "/*  "
+                + "                                   */\n" + "/***************************************/\n");
         Scanner sc = new Scanner(System.in);
-         ArrayList<Solicitud> solicitudes =Solicitud.solicitudes;
+        ArrayList<Solicitud> solicitudes = Solicitud.getSolicitudes();
         System.out.print("Ingrese id del evento: ");
         int id = sc.nextInt();
         for (Solicitud i : solicitudes) {
@@ -39,11 +44,68 @@ public class Planificador extends Usuario{
                 System.out.println("CLIENTE: " + i.getCliente().getNombre());
                 System.out.println("PLANIFICADOR ASIGNADO: " + this.getNombre());
                 System.out.println("FECHA DE REGISTRO: " + i.getFechaEvento());
-                System.out.println("TIPO: " );
+                System.out.println("TIPO: ");
                 System.out.println("FECHA DEL EVENTO: " + i.getFechaEvento());
-                System.out.println("PRECIO BASE: " );
+                System.out.println("PRECIO BASE: ");
             }
         }
+    }
+
+    public void confirmarEvento() {
+        System.out.print("/********** CONFIRMAR EVENTO **********/\n" + "/*  "
+                + "                                   */\n" + "/***************************************/\n");
+        String cod;
+        System.out.println("Ingrese el ID de la orden de pago");
+        cod = sc.nextLine();
+        for (OrdenDePago i : OrdenDePago.getPagos()) {
+            if (cod.equals(i.getCodigoOrden())) {
+                System.out.println("El pago de este evento se ha realizo el : " + i.getFechaActual());
+                i.setEstado(Estado.APROBADA);
+                System.out.println("El evento se ha aprobado para la fecha establecida");
+
+            }
+        }
+
+    }
+
+    public void ConsultarEvento(String opcion) {
+
+        switch (opcion) {
+            case "1":
+                System.out.println("Tiene " + filtro(BODA) + " Fiestas infantiles asigandas");
+                 
+                
+
+            case "2":
+                System.out.println("Tiene " + filtro(INFANTIL) + " Fiestas infantiles asigandas");
+                
+
+            case "3":
+                System.out.println("Tiene " + filtro(EMPRESARIAL) + " Fiesta empresarial asiganda");
+               
+
+            default:
+                System.out.println("Opcion invalida!!!!");
+
+        }
+
+    }
+
+    public int filtro(TipoEvento evento) {
+        int acum = 0;
+        ArrayList<Evento> eventos = Evento.getEventos();
+        for (Evento e : eventos) {
+            if (e.getCodigo().getClass().equals(evento)) {
+                if (e.getPlanificador().nombre.contentEquals(this.nombre)) {
+                    acum++;
+
+                }
+
+            }
+
+        }
+        return acum;
+
     }
 
 }

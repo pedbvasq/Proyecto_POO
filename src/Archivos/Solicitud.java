@@ -15,7 +15,16 @@ public class Solicitud {
     private Date fechaSolicitud;
     private Date fechaEvento;
     private Estado estado;
-    public static ArrayList<Solicitud> solicitudes = new ArrayList<>();
+     private static ArrayList<Solicitud> solicitudes = new ArrayList<>();
+
+    public static ArrayList<Solicitud> getSolicitudes() {
+        return solicitudes;
+    }
+
+    public static void setSolicitudes(ArrayList<Solicitud> solicitudes) {
+        Solicitud.solicitudes = solicitudes;
+    }
+   
 
     public Date getFechaSolicitud() {
         return fechaSolicitud;
@@ -40,6 +49,7 @@ public class Solicitud {
         this.fechaSolicitud=fechaSolicitud;
         this.fechaEvento = fechaEvento;
         this.estado = estado;
+        
     }
     
    
@@ -85,14 +95,7 @@ public class Solicitud {
         this.estado = estado;
     }
 
-    public ArrayList<Solicitud> getSolicitudes() {
-        return solicitudes;
-    }
-
-    public void setSolicitudes(ArrayList<Solicitud> solicitudes) {
-        this.solicitudes = solicitudes;
-    }
-    
+   
 
     public static Planificador elegirPlanificador() {
         ArrayList<String> usu = ManejoArchivos.LeeFichero("usuarios.txt");
@@ -116,6 +119,8 @@ public class Solicitud {
     }
 
     public void añadirSolicitud(Solicitud solicitud) {
+       
         solicitudes.add(solicitud);
+        
     }
 }

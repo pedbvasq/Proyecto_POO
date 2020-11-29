@@ -1,16 +1,16 @@
 package Usuarios;
 
 import Archivos.ManejoArchivos;
+import Archivos.OrdenDePago;
 import Archivos.Solicitud;
+import Eventos.Evento;
 import Eventos.TipoEvento;
-import static java.lang.Integer.parseInt;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Cliente extends Usuario {
@@ -113,8 +113,6 @@ public class Cliente extends Usuario {
         } while (fechaActual.after(validarTiempo(fecha)) == false);
     }
 
-
-
     private static Date validarTiempo(String fecha) {
         Date condicion;
         Date fechaActual = new Date();
@@ -158,7 +156,7 @@ public class Cliente extends Usuario {
             int codigo = Solicitud.generarID();
             Planificador planificador = Solicitud.elegirPlanificador();
             Solicitud st = new Solicitud(codigo, this, planificador, fechaActual, validarTiempo(fecha));
-            st.getSolicitudes().add(st);
+           st.añadirSolicitud(st);
             String cod = String.valueOf(st.getIdSolicitud());
             String nameC = this.nombre;
             String nameP = st.getUser().nombre;
@@ -178,6 +176,24 @@ public class Cliente extends Usuario {
             System.out.println("Solicitud cancelada");
 
         }
+
+    }
+
+    public void registrarPago() {
+        String opcion;
+        String codTransaccion;
+        Date fechaActual = new Date();
+        System.out.print("/**********SOLICITUDES PENDIENTES*********/\n" + "/* "
+                + "                                     "
+                + " */\n" + "/*****************************************/\n");
+        String cod = Evento.generarCodigo();
+        System.out.println("Su orden con codigo " + cod + "esta pendiente de pago");
+        System.out.println("¿Desea registar su pago ahora?(S/N) : ");
+        opcion = sc.nextLine();
+        System.out.println("Ingrese codigo de la transaccion : ");
+        codTransaccion = sc.nextLine();
+        OrdenDePago op = new OrdenDePago(cod, codTransaccion, fechaActual);
+         System.out.println("Listo, se ha registrado cuando el planificador valide el se pondra en contacto con usted. ");
 
     }
 

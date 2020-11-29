@@ -12,4 +12,9 @@ public class Boda extends Evento{
     public Boda(TipoEvento tipo, Date fecha, Cliente cl, Date hInicio, Date hFin) {
         super(tipo, fecha, cl, hInicio, hFin);
     }
+    
+    @Override
+     public void mostrarMensaje(){
+        
+    }
 }

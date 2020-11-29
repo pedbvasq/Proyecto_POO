@@ -16,5 +16,10 @@ public class Infantil extends Evento{
     }
     
     
+    @Override
+    public void mostrarMensaje(){
+        
+    }
+    
     
 }

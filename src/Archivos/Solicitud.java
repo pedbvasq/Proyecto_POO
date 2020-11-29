@@ -76,7 +76,7 @@ public class Solicitud {
 
     private Usuario elegirPlanificador() {
         ArrayList<String> usu = ManejoArchivos.LeeFichero("usuarios.txt");
-        ArrayList<Usuario> usuarios = Usuario.listaUsuarios();
+        ArrayList<Usuario> usuarios = Usuario.listaUsuarios(usu);
         double aleatorio = 0;
         for (Usuario i : usuarios) {
             if (String.valueOf(i.getTipo()).equals("P")) {

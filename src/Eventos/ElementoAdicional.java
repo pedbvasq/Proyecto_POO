@@ -1,12 +1,15 @@
 
 package Eventos;
 
+import java.util.Scanner;
 
-public class ElementoAdicional {
-    private String tipo;
-    private double valor;
-    private int cantidad;
-    private double precio;
+
+public abstract class ElementoAdicional {
+    protected String tipo;
+    protected  static double precioFinal;
+    protected int cantidad;
+    static Scanner sc = new Scanner(System.in);
+  
 
     public String getTipo() {
         return tipo;
@@ -16,13 +19,6 @@ public class ElementoAdicional {
         this.tipo = tipo;
     }
 
-    public double getValor() {
-        return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
 
     public int getCantidad() {
         return cantidad;
@@ -32,12 +28,12 @@ public class ElementoAdicional {
         this.cantidad = cantidad;
     }
 
-    public double getPrecio() {
-        return precio;
-    }
+    /**
+     *
+     * @return
+     */
+    public abstract double establecerCantidad();
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-    
 }
+
+

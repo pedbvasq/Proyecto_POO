@@ -11,8 +11,6 @@ import java.util.Iterator;
 public class Evento {
 
     private TipoEvento tipo;
-    private String sTipo;
-    private double tarifa;
     private Date fecha;
     private String codigo;
     private EstadoEvento estado = EstadoEvento.PENDIENTE;
@@ -21,7 +19,22 @@ public class Evento {
     private Date hFin;
     private int capacidad;
     private Planificador pl;
-    private static ArrayList<Evento> eventos= new ArrayList<>();
+    private char desicion;
+    private static ArrayList<Evento> eventos = new ArrayList<>();
+
+    public Evento(TipoEvento tipo, Date fecha, String codigo, Cliente cl, Date hInicio, Date hFin, int capacidad, char desicion,Planificador pl) {
+        this.tipo = tipo;
+        this.fecha = fecha;
+        this.codigo = codigo;
+        this.cl = cl;
+        this.hInicio = hInicio;
+        this.hFin = hFin;
+        this.capacidad = capacidad;
+        this.desicion = desicion;
+        this.pl = pl;
+    }
+    
+    
 
     public static ArrayList<Evento> getEventos() {
         return eventos;
@@ -30,30 +43,16 @@ public class Evento {
     public static void setEventos(ArrayList<Evento> eventos) {
         Evento.eventos = eventos;
     }
+
+   
+
     
-    
-
-    public Evento(TipoEvento tipo, Date fecha, Cliente cl, Date hInicio, Date hFin) {
-        this.tipo = tipo;
-        this.defTarifa();
-        this.fecha = fecha;
-        this.cl = cl;
-        this.tipoToString();
-        this.hInicio = hInicio;
-        this.hFin = hFin;
-
-    }
-
     public void setTipo(TipoEvento tipo) {
         this.tipo = tipo;
     }
 
     public TipoEvento getTipo() {
         return tipo;
-    }
-
-    public double getTarifa() {
-        return tarifa;
     }
 
     public void setFecha(Date fecha) {
@@ -104,9 +103,9 @@ public class Evento {
         return hFin;
     }
 
-    public  static String generarCodigo() {
-        ArrayList<String> codigos= new ArrayList<>();
-        
+    public static String generarCodigo() {
+        ArrayList<String> codigos = new ArrayList<>();
+
         String newCode = "";
         String codigo = "";
         while (!codigos.contains(codigo) && codigo.equals("")) {
@@ -126,62 +125,21 @@ public class Evento {
         this.estado = EstadoEvento.CONFIRMADO;
     }
 
-    public void defTarifa() {
-        switch (tipo) {
-            case BODA:
-                tarifa = 3500;
-
-            case EMPRESARIAL:
-                tarifa = 2000;
-
-            case INFANTIL:
-                tarifa = 300;
-        }
-
-    }
-
-    public void tipoToString() {
-        switch (tipo) {
-            case BODA:
-                sTipo = "Boda";
-
-            case EMPRESARIAL:
-                sTipo = "Empresarial";
-
-            case INFANTIL:
-                sTipo = "Infantil";
-        }
-    }
 
     @Override
     public String toString() {
-        String linea = codigo + "," + cl.getNombre() + "," + sTipo + "," + hInicio + "," + hFin + "," + capacidad + "," + pl + "," + estado;
+        String linea = codigo + "," + cl.getNombre() + ","  + "," + hInicio + "," + hFin + "," + capacidad + "," + pl + "," + estado;
         return linea;
     }
 
-    /**
-     *
-     * @param ev
-     * @return
-     */
-    
-    public static  ArrayList<Evento> agregarEvento(Evento ev){
-      eventos.add(ev);
-        return eventos;
+ 
+    public static void agregarEvento(Evento ev) {
+        eventos.add(ev);
     }
-     public  void mostrarMensaje(){
-         System.out.println("f");
-        
-    }
-    
 
-    
-    
-    
-    
-    
-    
-    
+    public void mostrarMensaje() {
+        System.out.println("f");
+
+    }
+   
 }
-
-

@@ -1,7 +1,10 @@
 package Usuarios;
 
 import Archivos.ManejoArchivos;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Usuario {
@@ -11,8 +14,13 @@ public class Usuario {
     protected String idUsuario;
     protected String contraseña;
     private char tipo;
+    public static ArrayList<Cliente> clientes = new ArrayList<>();
+    public static ArrayList<Planificador> planificadores = new ArrayList<>();
+
     static Scanner sc = new Scanner(System.in);
-    
+
+    public Usuario() {
+    }
 
     public Usuario(String nombre, String apellido, String idUsuario, String contraseña, char tipo) {
         this.nombre = nombre;
@@ -21,7 +29,7 @@ public class Usuario {
         this.contraseña = contraseña;
         this.tipo = tipo;
     }
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -62,23 +70,37 @@ public class Usuario {
         this.tipo = tipo;
     }
 
-    public static Usuario validarUsuario(String usuario , String contraseña) {
-   
-        for (Usuario i : listaUsuarios()) {
-            if (i.getIdUsuario().equals(usuario) && i.getContraseña().equals(contraseña)) {
-                return i;
+    public static boolean validarUsuario(String usuario, String contraseña) {
 
+        for (Usuario i : listaUsuarios()) {
+            Cliente cl = null;
+            Planificador pl;
+            if (i.getIdUsuario().equals(usuario) && i.getContraseña().equals(contraseña)) {
+                return true;
             }
 
         }
-        return null;
 
+        return false;
+    }
+
+    public Date convertirFecha(String fecha) {
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(fecha);
+        } catch (ParseException ex) {
+            System.out.println(ex);
+        }
+        return fechaDate;
     }
 
     public static ArrayList<Usuario> listaUsuarios() {
         ArrayList<String> clientePlanificador = ManejoArchivos.LeeFichero("usuarios.txt");
         ArrayList<Usuario> usuarios = new ArrayList<>();
 
+        Cliente cl = null;
         for (String i : clientePlanificador) {
             String[] usu = i.split(";");
             String nombre = usu[0];
@@ -88,14 +110,18 @@ public class Usuario {
             String contraseña = usu[3];
             char tipo = usu[4].charAt(0);
             Usuario user = new Usuario(nombre, apellido, usuario, contraseña, tipo);
-            usuarios.add(user);
+
+            if (String.valueOf(user.tipo).equals("C")) {
+                cl = new Cliente(nombre, apellido, usuario, contraseña, tipo);
+                clientes.add(cl);
+            } else {
+                Planificador pl = new Planificador(nombre, apellido, usuario, contraseña, tipo);
+                planificadores.add(pl);
+
+            }
 
         }
-
         return usuarios;
 
     }
-
-   
-
 }

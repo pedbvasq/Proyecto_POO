@@ -6,6 +6,7 @@
 package Eventos;
 
 import Usuarios.Cliente;
+import Usuarios.Planificador;
 import java.util.Date;
 
 /**
@@ -14,10 +15,13 @@ import java.util.Date;
  */
 public class Empresarial extends Evento {
     private int cantidadPersonas;
+     final double precioBase =2000;
 
-    public Empresarial(TipoEvento tipo, Date fecha, Cliente cl, Date hInicio, Date hFin) {
-        super(tipo, fecha, cl, hInicio, hFin);
+    public Empresarial(TipoEvento tipo, Date fecha, String codigo, Cliente cl, Date hInicio, Date hFin, int capacidad, char desicion, Planificador pl) {
+        super(tipo, fecha, codigo, cl, hInicio, hFin, capacidad, desicion, pl);
     }
+
+   
     
 
     @Override

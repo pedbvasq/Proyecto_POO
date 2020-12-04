@@ -122,8 +122,7 @@ public class Solicitud {
 
     public static int generarID() {
         Random r = new Random();
-        return r.nextInt(1000);
-    }
+        return r.nextInt(1000-10000);
 
     public void añadirSolicitud(Solicitud solicitud) {
 

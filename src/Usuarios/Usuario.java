@@ -16,6 +16,7 @@ public class Usuario {
     private char tipo;
     public static ArrayList<Cliente> clientes = new ArrayList<>();
     public static ArrayList<Planificador> planificadores = new ArrayList<>();
+    private static ArrayList<Usuario> usuarios = new ArrayList<>();
 
     static Scanner sc = new Scanner(System.in);
 
@@ -73,8 +74,6 @@ public class Usuario {
     public static boolean validarUsuario(String usuario, String contraseña) {
 
         for (Usuario i : listaUsuarios()) {
-            Cliente cl = null;
-            Planificador pl;
             if (i.getIdUsuario().equals(usuario) && i.getContraseña().equals(contraseña)) {
                 return true;
             }
@@ -98,7 +97,6 @@ public class Usuario {
 
     public static ArrayList<Usuario> listaUsuarios() {
         ArrayList<String> clientePlanificador = ManejoArchivos.LeeFichero("usuarios.txt");
-        ArrayList<Usuario> usuarios = new ArrayList<>();
 
         Cliente cl = null;
         for (String i : clientePlanificador) {
@@ -110,6 +108,7 @@ public class Usuario {
             String contraseña = usu[3];
             char tipo = usu[4].charAt(0);
             Usuario user = new Usuario(nombre, apellido, usuario, contraseña, tipo);
+            usuarios.add(user);
 
             if (String.valueOf(user.tipo).equals("C")) {
                 cl = new Cliente(nombre, apellido, usuario, contraseña, tipo);
@@ -121,6 +120,7 @@ public class Usuario {
             }
 
         }
+
         return usuarios;
 
     }

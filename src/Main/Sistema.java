@@ -21,7 +21,7 @@ public class Sistema {
     public void menu() {
         System.out.println("++++++++++++++++++++++++++++++++++++++++++++++\n"
                 + "          BIENVENIDO AL SISTEMA\n" + "++++++++++++++++++++++++++++++++++++++++++++++");
-        String usuario ;
+        String usuario;
         String contraseña;
         do {
             System.out.println("USUARIO:");
@@ -29,8 +29,7 @@ public class Sistema {
             System.out.println("CONTRASEÑA:");
             contraseña = sc.nextLine();
 
-        } while (Usuario.validarUsuario(usuario, contraseña));
-        
+        } while (Usuario.validarUsuario(usuario, contraseña) == false);
 
         Cliente Cl = Cliente.validarCliente(usuario, contraseña);
         if (String.valueOf(Cl.getTipo()).equals("C")) {
@@ -50,7 +49,6 @@ public class Sistema {
                                 + " " + Cl.getApellido());
                         String opcionU = "";
                         String opcionSolicitud;
-                        String fecha;
 
                         while (!opcionU.equals("4")) {
                             System.out.println("╔                TIPO DE EVENTO(Elija)                 ");
@@ -60,37 +58,31 @@ public class Sistema {
                             System.out.println("║ 4. Regresar a menu principal         ║");
                             System.out.print("Ingrese opcion: ");
                             opcionU = sc.nextLine();
+                            String fecha;
+                            String opcionSoli;
                             switch (opcionU) {
                                 case "1":
-                                    System.out.println("Ingrese fecha(dd/MM/yyyy):");
-                                    fecha = sc.nextLine();
-                                    Cl.CondicionEvento(fecha);
-                                    System.out.println("¿Desea ingresar su solictud?(S/N)");
-                                    opcionSolicitud = sc.nextLine();
-                                    Cl.crearSolicitud(opcionSolicitud, fecha, TipoEvento.BODA);
-
+                                    Cl.condicionEvento("1");
+                                    System.out.println("¿Desea ingresar su solicitud ?(S/N)");
+                                    opcionSoli = sc.nextLine().toLowerCase();
+                                    Cl.crearSolicitud(opcionSoli, TipoEvento.BODA);
                                     break;
+
                                 case "2":
-
-                                    System.out.println("Ingrese fecha(dd/MM/yyyy):");
-                                    fecha = sc.nextLine();
-                                    Cl.CondicionEvento(fecha);
-                                    System.out.println("¿Desea ingresar su solictud?(S/N)");
-                                    opcionSolicitud = sc.nextLine();
-                                    Cl.crearSolicitud(opcionSolicitud, fecha, TipoEvento.EMPRESARIAL);
-
+                                    Cl.condicionEvento("2");
+                                    System.out.println("¿Desea ingresar su solicitud ?");
+                                    opcionSoli = sc.nextLine().toLowerCase();
+                                    Cl.crearSolicitud(opcionSoli, TipoEvento.INFANTIL);
                                     break;
+
                                 case "3":
-                                    System.out.println("Ingrese fecha(dd/MM/yyyy):");
-                                    fecha = sc.nextLine();
-                                    Cl.CondicionEvento(fecha);
-                                    System.out.println("¿Desea ingresar su solictud?(S/N)");
-                                    opcionSolicitud = sc.nextLine();
-                                    Cl.crearSolicitud(opcionSolicitud, fecha, TipoEvento.INFANTIL);
-
+                                    Cl.condicionEvento("3");
+                                    System.out.println("¿Desea ingresar su solicitud ?");
+                                    opcionSoli = sc.nextLine().toLowerCase();
+                                    Cl.crearSolicitud(opcionSoli, TipoEvento.INFANTIL);
                                     break;
+
                                 case "4":
-                                    opcionU = "4";
 
                                     break;
 

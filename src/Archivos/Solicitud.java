@@ -21,6 +21,16 @@ public class Solicitud {
      ArrayList<String> solicitudesArchivo = ManejoArchivos.LeeFichero("solicitudes.txt");
     static Planificador p;
 
+    public Solicitud(int idSolicitud, Cliente cliente, Planificador user, Date fechaSolicitud, Date fechaEvento, TipoEvento tipo) {
+        this.idSolicitud = idSolicitud;
+        this.cliente = cliente;
+        this.fechaSolicitud = fechaSolicitud;
+        this.fechaEvento = fechaEvento;
+        this.tipo = tipo;
+        this.estado = estado.PENDIENTE;
+        this.user = user;
+    }
+
     public static ArrayList<Solicitud> getSolicitudes() {
         return solicitudes;
     }
@@ -45,25 +55,6 @@ public class Solicitud {
         this.tipo = tipo;
     }
 
-    public Solicitud(int idSolicitud, Cliente cliente, Planificador user, Date fechaSolicitud, Date fechaEvento, TipoEvento tipo) {
-        this.idSolicitud = idSolicitud;
-        this.cliente = cliente;
-        this.user = user;
-        this.fechaSolicitud = fechaSolicitud;
-        this.fechaEvento = fechaEvento;
-        this.estado = estado.PENDIENTE;
-        this.tipo = tipo;
-    }
-
-    public Solicitud(int idSolicitud, Cliente cliente, Planificador user, Date fechaSolicitud, Date fechaEvento, Estado estado) {
-        this.idSolicitud = idSolicitud;
-        this.cliente = cliente;
-        this.user = user;
-        this.fechaSolicitud = fechaSolicitud;
-        this.fechaEvento = fechaEvento;
-        this.estado = estado;
-
-    }
 
     public int getIdSolicitud() {
         return idSolicitud;
@@ -112,10 +103,8 @@ public class Solicitud {
         for (Usuario i : usuarios) {
             if (String.valueOf(i.getTipo()).equals("P")) {
                 aleatorio = Math.random() * usuarios.size();
-                Planificador Pl = Usuario.planificadores.get((int) aleatorio);
-
+                Planificador p = Usuario.planificadores.get((int) aleatorio);
                 return p;
-
             }
         }
         return null;

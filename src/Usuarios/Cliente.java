@@ -5,18 +5,17 @@ import Archivos.OrdenDePago;
 import Archivos.Solicitud;
 import Eventos.Evento;
 import Eventos.TipoEvento;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Scanner;
 
 public class Cliente extends Usuario {
 
     private String telefono;
     private String correo;
+    private static Date fechaEvento;
+    
 
     GregorianCalendar calend = new GregorianCalendar();
     static TipoEvento e;
@@ -31,82 +30,89 @@ public class Cliente extends Usuario {
         super(nombre, apellido, idUsuario, contraseña, tipo);
     }
 
-    public void CondicionEvento(String fecha) {
-        
+    public void condicionEvento(String opcion) {
+        String fecha;
 
-        Date fechaActual = new Date();
         do {
-            if (fechaActual.after(validarTiempo(fecha))) {
+
+            System.out.println("Ingrese fecha(dd/MM/yyyy):");
+            fecha = sc.nextLine();
+            if (validarTiempo(fecha, opcion)) {
                 System.out.println("Fecha del evento :" + fecha);
                 System.out.println("Fecha valida!!");
+                System.out.println("Ha registrado los datos necesarios para la solicitud.");
+                break;
 
             } else {
                 System.out.println(" Fecha del evento :" + fecha);
                 System.out.println("La fecha es muy proxima.Para este tipo de evento debemos tener\n" + "por lo menos 10 meses  para planficar ingrese nuevamente.");
-            }
-            if (fechaActual.after(validarTiempo(fecha))) {
-                System.out.println(" Fecha del evento :" + fecha);
-
-            } else {
-                System.out.println("La fecha es muy proxima.Para este tipo de evento debemos tener\n" + "por lo menos 3 semanas para planficar ingrese nuevamente.");
-
-            }
-            if (fechaActual.after(validarTiempo(fecha))) {
-                System.out.println("Fecha del evento :" + fecha);
-                System.out.println("Fecha valida!!");
-
-            } else {
-                System.out.println("La fecha es muy proxima.Para este tipo de evento debemos tener\n" + "por lo menos 2 meses para planficar ingrese nuevamente.");
 
             }
 
-        } while (fechaActual.after(validarTiempo(fecha)) == false);
+        } while (validarTiempo(fecha, opcion) == false);
+
     }
 
-    private Date validarTiempo(String fecha) {
+    public Boolean validarTiempo(String fecha, String opcion) {
         Date fecha1 = convertirFecha(fecha);
         Date condicion;
         Calendar cal = Calendar.getInstance();
+        Date fechaActual = new Date();
 
-        switch (e) {
-            case BODA:
+        switch (opcion) {
+                         case "1":
 
-                cal.setTime(fecha1);
+                cal.setTime(fechaActual);
                 cal.add(cal.MONTH, 10);
                 condicion = cal.getTime();
-                return condicion;
+                if (fecha1.after(condicion)) {
+                    Cliente.fechaEvento = fecha1;
+                    return true;
+                } else {
+                    return false;
+                }
 
-            case EMPRESARIAL:
-                cal.setTime(fecha1);
-                cal.add(cal.MONTH, 10);
+            case "2":
+                cal.setTime(fechaActual);
+                cal.add(cal.MONTH, 2);
                 condicion = cal.getTime();
-                return condicion;
+                if (fecha1.after(condicion)) {
+                    Cliente.fechaEvento = fecha1;
+                    return true;
 
-            case INFANTIL:
-                cal.setTime(fecha1);
-                cal.add(cal.DATE, 2);
+                } else {
+                    return false;
+                }
+
+            case "3":
+                cal.setTime(fechaActual);
+                cal.add(cal.DATE, 14);
                 condicion = cal.getTime();
-                return condicion;
+                if (fecha1.after(condicion)) {
+                    Cliente.fechaEvento =  fecha1;
+                    return true;
+                } else {
+                    return false;
+                }
+
+            default:
+                System.out.println("opcion");
         }
         return null;
 
     }
 
-    public void crearSolicitud(String opcion, String fecha, TipoEvento ev) {
+    public void crearSolicitud(String opcion, TipoEvento ev) {
         Date fechaActual = new Date();
         if (opcion.startsWith("s") || opcion.startsWith("S")) {
             int codigo = Solicitud.generarID();
             Planificador planificador = Solicitud.elegirPlanificador();
             String nameC = this.nombre;
             String fecha1 = String.valueOf(fechaActual.getDay()) + "/" + String.valueOf(fechaActual.getMonth()) + "/" + String.valueOf(fechaActual.getYear());
-            String total = codigo + "," + nameC + "," + planificador + "," + fecha1 + "," + fecha + "," + "Pendiente";
-            Solicitud st = new Solicitud(codigo, this, planificador, fechaActual, validarTiempo(fecha), ev);
-            String cod = String.valueOf(st.getIdSolicitud());
-
-            String nameP = st.getUser().nombre;
-
-            st.añadirSolicitud(st);
+            String total = codigo + "," + nameC + "," + planificador.nombre + "," + fecha1 + "," + Cliente.fechaEvento + "," + "Pendiente";
             ManejoArchivos.EscribirArchivo("solicitudes.txt", total);
+            Solicitud st = new Solicitud(codigo,this,planificador,fechaActual,fechaEvento,ev);
+            st.añadirSolicitud(st);
             System.out.print("/********** SOLICITUD REGISTRADA**********/\n" + "/*                                     */\n" + "/***************************************/\n");
             System.out.println("DATOS");
             System.out.println("CLIENTE: " + st.getCliente().nombre);
@@ -122,7 +128,6 @@ public class Cliente extends Usuario {
         }
 
     }
-
     public void registrarPago() {
         String opcion;
         String codTransaccion;
@@ -142,7 +147,7 @@ public class Cliente extends Usuario {
     }
 
     public static Cliente validarCliente(String usuario, String contraseña) {
-        
+
         for (Cliente i : clientes) {
             if (i.getIdUsuario().equals(usuario) && i.getContraseña().equals(contraseña)) {
                 return i;
@@ -152,5 +157,6 @@ public class Cliente extends Usuario {
         return null;
 
     }
+    
 
 }

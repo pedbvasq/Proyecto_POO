@@ -15,21 +15,22 @@ public class Bocaditos extends ElementoAdicional {
 
     private final double precioBocaditos = 0.25;
     private final double preciosPromociones = 0.10;
-    static Scanner sc = new Scanner(System.in);
+    
 
     @Override
-    public double establecerCantidad() {
+    public void establecerCantidad() {
+        Scanner sc = new Scanner(System.in);
         int cantidad;
         System.out.println("Cuantos bocaditos desea");
         cantidad = sc.nextInt();
         super.setCantidad(cantidad);
         if (cantidad > 150) {
-            return precioBocaditos * cantidad;
+            this.setPrecioFinal( precioBocaditos * cantidad);
 
         } else {
-            return preciosPromociones * cantidad;
+            this.setPrecioFinal(preciosPromociones * cantidad);
         }
-
+        sc.close();
     }
 
 }

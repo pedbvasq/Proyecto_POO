@@ -7,19 +7,25 @@ package Eventos;
 
 import java.util.Scanner;
 
+/**
+ *
+ * @author pedro
+ */
 public class Comida extends ElementoAdicional {
 
     private final int precioMenu = 15;
+    //private double precioFinal;
     static Scanner sc = new Scanner(System.in);
 
     @Override
-    public double establecerCantidad() {
+    public void establecerCantidad() {
         int cantidad;
         System.out.println("Cantidadn de platos:");
         cantidad = sc.nextInt();
         super.setCantidad(cantidad);
-        return precioMenu * cantidad;
+        this.setPrecioFinal(precioMenu * cantidad);
         
-    }
 
+    }
+    
 }

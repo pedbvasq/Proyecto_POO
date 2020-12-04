@@ -20,6 +20,11 @@ public class Evento {
     private int capacidad;
     private Planificador pl;
     private char desicion;
+    private Comida comida;
+    private Bebida bebida;
+    private Musica musica;
+    private Fotografia fotografia;
+    private Bocaditos bocaditos;
     private static ArrayList<Evento> eventos = new ArrayList<>();
 
     public Evento(TipoEvento tipo, Date fecha, String codigo, Cliente cl, Date hInicio, Date hFin, int capacidad, char desicion,Planificador pl) {
@@ -102,6 +107,23 @@ public class Evento {
     public Date getFin() {
         return hFin;
     }
+    
+    public void setComida(Comida comida){
+        this.comida = comida;
+    }
+    public void setBebida(Bebida bebida){
+        this.bebida=bebida;    
+    }
+    public void setMusica(Musica musica){
+        this.musica = musica;
+    }
+    public void setFotografia(Fotografia fotografia){
+        this.fotografia=fotografia;
+    }
+    public void setBocaditos(Bocaditos bocaditos){
+        this.bocaditos=bocaditos;
+    }
+    
 
     public static String generarCodigo() {
         ArrayList<String> codigos = new ArrayList<>();
@@ -141,5 +163,16 @@ public class Evento {
         System.out.println("f");
 
     }
+    public double calcularCostoAdicionales(){
+        
+        double costoAdicionales = comida.getPrecioFinal()+bebida.getPrecioFinal()+musica.getPrecioFinal()+fotografia.getPrecioFinal()+bocaditos.getPrecioFinal();
+        return costoAdicionales;
+    }
+    public double calcularCostoTotal(){
+        double costoTotal=this.tarifa+this.calcularCostoAdicionales();
+        return costoTotal;
+    }
+}
+    
    
 }

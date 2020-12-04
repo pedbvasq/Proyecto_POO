@@ -11,6 +11,8 @@ import java.util.Iterator;
 public class Evento {
 
     private TipoEvento tipo;
+    private double tarifa;
+    private String sTipo;
     private Date fecha;
     private String codigo;
     private EstadoEvento estado = EstadoEvento.PENDIENTE;
@@ -49,7 +51,9 @@ public class Evento {
         Evento.eventos = eventos;
     }
 
-   
+   public double getTarifa(){
+        return tarifa;
+    }
 
     
     public void setTipo(TipoEvento tipo) {
@@ -124,7 +128,19 @@ public class Evento {
         this.bocaditos=bocaditos;
     }
     
-
+    public void defTarifa(){
+       switch(tipo){
+            case BODA:
+                tarifa=3500;
+        
+            case EMPRESARIAL:
+                tarifa=2000;
+        
+            case INFANTIL:
+                tarifa=300;
+        }
+        
+    }
     public static String generarCodigo() {
         ArrayList<String> codigos = new ArrayList<>();
 
@@ -147,10 +163,22 @@ public class Evento {
         this.estado = EstadoEvento.CONFIRMADO;
     }
 
-
+    public void tipoToString(){
+       switch(tipo){
+            case BODA:
+                sTipo="Boda";
+        
+            case EMPRESARIAL:
+                sTipo="Empresarial";
+        
+            case INFANTIL:
+                sTipo="Infantil";
+        }
+    }    
+    
     @Override
     public String toString() {
-        String linea = codigo + "," + cl.getNombre() + ","  + "," + hInicio + "," + hFin + "," + capacidad + "," + pl + "," + estado;
+        String linea = codigo + "," + cl.getNombre() + ","+ sTipo + "," + hInicio + "," + hFin + "," + capacidad + "," + pl + "," + estado;
         return linea;
     }
 

@@ -1,25 +1,13 @@
 
 package Eventos;
 
-import java.util.Scanner;
-
-
 public abstract class ElementoAdicional {
-    protected String tipo;
-    protected  static double precioFinal;
-    protected int cantidad;
-    static Scanner sc = new Scanner(System.in);
-  
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-
+    
+    
+    private int cantidad;
+    private double precioFinal;//precio total a pagar 
+    
+    
     public int getCantidad() {
         return cantidad;
     }
@@ -28,9 +16,13 @@ public abstract class ElementoAdicional {
         this.cantidad = cantidad;
     }
 
-    public abstract double establecerCantidad();
+    public double getPrecioFinal() {
+        return precioFinal;
+    }
+
+    public void setPrecioFinal(double precio) {
+        this.precioFinal = precio;
+    }
     
-    
+    public abstract void establecerCantidad();
 }
-
-

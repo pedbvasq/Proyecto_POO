@@ -145,7 +145,7 @@ public class Planificador extends Usuario {
         return null;
 
     }
-    public void registroDatosEvento(Solicitud solicitud){
+   public void registroDatosEvento(Solicitud solicitud){
         Scanner sc = new Scanner(System.in);
         DateFormat hora = new SimpleDateFormat("HH:mm:ss");
         try{
@@ -171,73 +171,78 @@ public class Planificador extends Usuario {
     
     public static void registrarAdicionales(Solicitud solicitud){
         Scanner sc = new Scanner(System.in);
-        System.out.println("/*****REGISTRO DE ELEMENTOS ADICIONALES PARA EL EVENTO*****/");
-        System.out.println("Las opciones son: \n"+"1. Comida \n"+"2. Bocaditos \n"+"3. Música \n"+"4. Fotografía \n"+"5. Bebida \n"+"6. Regresar al menú anterior");
-        ArrayList<Integer> opcionesIngresadas = new ArrayList<>();
-        int opcion = sc.nextInt();
-        if (!opcionesIngresadas.contains(opcion)&&opcion!=0){
-            opcionesIngresadas.add(opcion);
-            String sn;
-            switch (opcion){
-                
-                case 1:
-                    Comida comida = new Comida();
-                    comida.establecerCantidad();
-                    System.out.println("Total: "+comida.getPrecioFinal());
-                    System.out.print("Agregar (S/N)");
-                    sn = sc.nextLine().toLowerCase();
-                    if (sn.equals("s")){
-                        solicitud.getEvento().setComida(comida);
-                        System.out.println("Total a pagar: "+ solicitud.getEvento().calcularCostoTotal());
-                    }else{break;}
-                    break;
-                case 2:
-                    Bocaditos bocaditos = new Bocaditos();
-                    bocaditos.establecerCantidad();
-                    System.out.println("Toatl: "+bocaditos.getPrecioFinal());
-                    System.out.print("Agregar (S/N)");
-                    sn = sc.nextLine().toLowerCase();
-                    if (sn.equals("s")){
-                        solicitud.getEvento().setBocaditos(bocaditos);
-                        System.out.println("Total a pagar: "+ solicitud.getEvento().calcularCostoTotal());
-                    }else{break;}
-                    
-                case 3: 
-                    Musica musica = new Musica();
-                    musica.establecerCantidad();
-                    System.out.println("Total: "+musica.getPrecioFinal());
-                    System.out.print("Agregar (S/N)");
-                    sn = sc.nextLine().toLowerCase();
-                    if (sn.equals("s")){
-                        solicitud.getEvento().setMusica(musica);
-                        System.out.println("Total a pagar: "+ solicitud.getEvento().calcularCostoTotal());
-                    }else{break;}
-                    
-                case 4:
-                    Fotografia foto = new Fotografia();
-                    foto.establecerCantidad();
-                    System.out.println("Total: "+foto.getPrecioFinal());
-                    System.out.print("Agregar (S/N)");
-                    sn = sc.nextLine().toLowerCase();
-                    if (sn.equals("s")){
-                        solicitud.getEvento().setFotografia(foto);
-                        System.out.println("Total a pagar: "+ solicitud.getEvento().calcularCostoTotal());
-                    }else{break;}
-                case 5:
-                    Bebida bebida = new Bebida();
-                    bebida.establecerCantidad();
-                    System.out.println("Total: "+bebida.getCantidad());
-                    System.out.print("Agregar (S/N)");
-                    sn = sc.nextLine().toLowerCase();
-                    if (sn.equals("s")){
-                        solicitud.getEvento().setBebida(bebida);
-                        System.out.println("Total a pagar: "+ solicitud.getEvento().calcularCostoTotal());
-                    }else{break;}
-                    
-                case 6:
-                    break;
-            }
-        }
-    }
+        int opcion;
+        do {
+            System.out.println("/*****REGISTRO DE ELEMENTOS ADICIONALES PARA EL EVENTO*****/");
+            System.out.println("Las opciones son: \n"+"1. Comida \n"+"2. Bocaditos \n"+"3. Música \n"+"4. Fotografía \n"+"5. Bebida \n"+"6. Regresar al menú anterior");
+            ArrayList<Integer> opcionesIngresadas = new ArrayList<>();
+            
+            opcion = sc.nextInt();
+            if (!opcionesIngresadas.contains(opcion)&&opcion!=0){
+                opcionesIngresadas.add(opcion);
+                String sn;
+                switch (opcion){
 
+                    case 1:
+                        Comida comida = new Comida();
+                        comida.establecerCantidad();
+                        System.out.println("Total: "+comida.getPrecioFinal());
+                        System.out.print("Agregar (S/N)");
+                        sn = sc.nextLine().toLowerCase();
+                        if (sn.equals("s")){
+                            solicitud.getEvento().setComida(comida);
+                            System.out.println("Total a pagar: "+ solicitud.getEvento().calcularCostoTotal());
+                        }else{break;}
+                        break;
+                    case 2:
+                        Bocaditos bocaditos = new Bocaditos();
+                        bocaditos.establecerCantidad();
+                        System.out.println("Toatl: "+bocaditos.getPrecioFinal());
+                        System.out.print("Agregar (S/N)");
+                        sn = sc.nextLine().toLowerCase();
+                        if (sn.equals("s")){
+                            solicitud.getEvento().setBocaditos(bocaditos);
+                            System.out.println("Total a pagar: "+ solicitud.getEvento().calcularCostoTotal());
+                        }else{break;}
+
+                    case 3: 
+                        Musica musica = new Musica();
+                        musica.establecerCantidad();
+                        System.out.println("Total: "+musica.getPrecioFinal());
+                        System.out.print("Agregar (S/N)");
+                        sn = sc.nextLine().toLowerCase();
+                        if (sn.equals("s")){
+                            solicitud.getEvento().setMusica(musica);
+                            System.out.println("Total a pagar: "+ solicitud.getEvento().calcularCostoTotal());
+                        }else{break;}
+
+                    case 4:
+                        Fotografia foto = new Fotografia();
+                        foto.establecerCantidad();
+                        System.out.println("Total: "+foto.getPrecioFinal());
+                        System.out.print("Agregar (S/N)");
+                        sn = sc.nextLine().toLowerCase();
+                        if (sn.equals("s")){
+                            solicitud.getEvento().setFotografia(foto);
+                            System.out.println("Total a pagar: "+ solicitud.getEvento().calcularCostoTotal());
+                        }else{break;}
+                    case 5:
+                        Bebida bebida = new Bebida();
+                        bebida.establecerCantidad();
+                        System.out.println("Total: "+bebida.getCantidad());
+                        System.out.print("Agregar (S/N)");
+                        sn = sc.nextLine().toLowerCase();
+                        if (sn.equals("s")){
+                            solicitud.getEvento().setBebida(bebida);
+                            System.out.println("Total a pagar: "+ solicitud.getEvento().calcularCostoTotal());
+                        }else{break;}
+
+                    case 6:
+                        break;
+                    default:
+                        System.out.println("¡Opcion no valida!");
+                    }
+                }
+            }while(opcion!=6);
+        }
 }

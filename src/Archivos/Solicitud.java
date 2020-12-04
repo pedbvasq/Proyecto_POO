@@ -17,9 +17,19 @@ public class Solicitud {
     private Date fechaEvento;
     private Estado estado;
     private TipoEvento tipo;
+    private Evento evento;
     private static ArrayList<Solicitud> solicitudes = new ArrayList<>();
      ArrayList<String> solicitudesArchivo = ManejoArchivos.LeeFichero("solicitudes.txt");
     static Planificador p;
+    
+    
+    public Evento getEvento(){
+        return evento;
+    }
+    
+    public void setEvento(Evento evento){
+        this.evento=evento;
+    }
 
     public Solicitud(int idSolicitud, Cliente cliente, Planificador user, Date fechaSolicitud, Date fechaEvento, TipoEvento tipo) {
         this.idSolicitud = idSolicitud;

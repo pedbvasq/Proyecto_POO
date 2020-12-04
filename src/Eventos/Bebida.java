@@ -1,6 +1,8 @@
 package Eventos;
 
+
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Bebida extends ElementoAdicional {
 
@@ -8,65 +10,59 @@ public class Bebida extends ElementoAdicional {
     private final double Pvodka = 25;
     private final double Pcerveza = 3;
     private final double Prefrescos = 1;
-
+    
+    
+    
     @Override
-    public double establecerCantidad() {
+    public void establecerCantidad() {
         int opcion;
+        ArrayList<Integer> opcionesIngresadas= new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
         int precioTotal = 0;
-        String sn = null;
+                
         do {
+            
 
-            int cantidad = 0;
+            int cantidad;
 
-            System.out.println("Bebidas disponibles : \n" + "1.Whisky\n" + "2.Vodka\n" + "3.Cerveza\n" + "4.Refresco" + "5.Regresar");
+            System.out.println("Bebidas disponibles : \n" + "1.Whisky\n" + "2.Vodka\n" + "3.Cerveza\n" + "4.Refresco\n" + "5.Terminar");
             opcion = sc.nextInt();
-
-            int botellas[] = new int[3];
-            if (botellas[opcion] == 0) {
-
+            
+            if (!opcionesIngresadas.contains(opcion)){
+                opcionesIngresadas.add(opcion);
                 switch (opcion) {
-
                     case 1:
-                        System.out.println("Cantidad : ");
+                        System.out.println("Cantidad: ");
                         cantidad = sc.nextInt();
-                        precioTotal += Pwhisky * cantidad;
-                        System.out.println("¿ Desea seguir agregando?");
-                        sn = sc.nextLine();
-                        System.out.println("");
+                        precioTotal += Pwhisky * cantidad;break;
 
                     case 2:
-                        System.out.println("Cantidad : ");
+                        System.out.println("Cantidad: ");
                         cantidad = sc.nextInt();
-                        precioTotal += Pvodka * cantidad;
-                        System.out.println("¿ Desea seguir agregando?");
-                        sn = sc.nextLine().toLowerCase();
+                        precioTotal += Pvodka * cantidad;break;
 
                     case 3:
-                        System.out.println("Cantidad : ");
+                        System.out.println("Cantidad: ");
                         cantidad = sc.nextInt();
-                        precioTotal += Pcerveza * cantidad;
-                        System.out.println("¿ Desea seguir agregando?");
-                        sn = sc.nextLine().toLowerCase();
+                        precioTotal += Pcerveza * cantidad;break;
 
                     case 4:
-                        System.out.println("Cantidad : ");
+                        System.out.println("Cantidad: ");
                         cantidad = sc.nextInt();
-                        precioTotal += Pwhisky * cantidad;
-                        System.out.println("¿ Desea seguir agregando?");
-                        sn = sc.nextLine().toLowerCase();
-
+                        precioTotal += Pwhisky * cantidad;break;
+                    case 5:
+                        break;
+                    
                     default:
                         System.out.println("Opcion no valida");
-
+                                
                 }
-
-            } else {
-                System.out.println("Ya no puede seleccionar ese elemento.");
             }
-
-        } while (!sn.equals("n"));
-        return precioTotal;
+                else {System.out.println("Opcion ya igresada, ingrese otra opcion");}
+        } while (opcion!=5);
+        
+        sc.close();
+        this.setPrecioFinal(precioTotal);
 
     }
-
 }

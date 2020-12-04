@@ -11,6 +11,9 @@ import static Eventos.TipoEvento.EMPRESARIAL;
 import static Eventos.TipoEvento.INFANTIL;
 import java.util.ArrayList;
 import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class Planificador extends Usuario {

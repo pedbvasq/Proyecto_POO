@@ -7,10 +7,6 @@ package Eventos;
 
 import java.util.Scanner;
 
-/**
- *
- * @author pedro
- */
 public class Comida extends ElementoAdicional {
 
     private final int precioMenu = 15;
@@ -24,7 +20,6 @@ public class Comida extends ElementoAdicional {
         super.setCantidad(cantidad);
         return precioMenu * cantidad;
         
-
     }
 
 }

@@ -112,7 +112,9 @@ public class Usuario {
 
             if (String.valueOf(user.tipo).equals("C")) {
                 cl = new Cliente(nombre, apellido, usuario, contraseña, tipo);
+
                 clientes.add(cl);
+
             } else {
                 Planificador pl = new Planificador(nombre, apellido, usuario, contraseña, tipo);
                 planificadores.add(pl);
@@ -124,4 +126,11 @@ public class Usuario {
         return usuarios;
 
     }
-}
+
+    public static char tipo(String usuario, String contraseña) {
+        for (Usuario i : listaUsuarios()) {
+            if (i.getIdUsuario().equals(usuario) && i.contraseña.equals(contraseña)) {
+                return i.getTipo();
+
+            }
+        }

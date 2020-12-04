@@ -28,14 +28,9 @@ public abstract class ElementoAdicional {
         this.cantidad = cantidad;
     }
 
-    /**
-     *
-     * @return
-     */
     public abstract double establecerCantidad();
     
     
-
 }
 
 

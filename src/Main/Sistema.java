@@ -24,16 +24,17 @@ public class Sistema {
         String usuario;
         String contraseña;
         do {
-            System.out.println("USUARIO:");
+            System.out.print("USUARIO:");
             usuario = sc.nextLine();
-            System.out.println("CONTRASEÑA:");
+            System.out.print("CONTRASEÑA:");
             contraseña = sc.nextLine();
 
-        } while (Usuario.validarUsuario(usuario, contraseña) == false);
-
-        Cliente Cl = Cliente.validarCliente(usuario, contraseña);
-        if (String.valueOf(Cl.getTipo()).equals("C")) {
+        } while (Usuario.validarUsuario(usuario, contraseña) == false); //validando credenciales
+        
+            //pregunto si cliente o planificador
+        if (String.valueOf(Usuario.tipo(usuario, contraseña)).equals("C")) {
             String opcionC = "";
+            Cliente Cl = Cliente.validarCliente(usuario, contraseña);
 
             while (!opcionC.equals("3")) {
                 System.out.println("╔                Menu                       ");
@@ -48,8 +49,6 @@ public class Sistema {
                                 + Cl.getNombre()
                                 + " " + Cl.getApellido());
                         String opcionU = "";
-                        String opcionSolicitud;
-
                         while (!opcionU.equals("4")) {
                             System.out.println("╔                TIPO DE EVENTO(Elija)                 ");
                             System.out.println("║ 1.Boda                  ║");
@@ -83,14 +82,16 @@ public class Sistema {
                                     break;
 
                                 case "4":
-
+                                    System.out.println("Regresando...");
                                     break;
 
                                 default:
                                     System.out.println("Opcion No valida!!");
                             }
                         }
-                        sc.close();
+                        //sc.close();
+                        
+                        break;
 
                     case "2":
                         Cl.registrarPago();
@@ -107,12 +108,8 @@ public class Sistema {
             sc.close();
 
         } else {
-            System.out.println("Cliente no encontrado");
-        }
 
-        Planificador Pl = Planificador.validarCliente(usuario, contraseña);
-
-        if (String.valueOf(Pl.getTipo()).equals("P")) {
+            Planificador Pl = Planificador.validarCliente(usuario, contraseña);
             String opcionP = "";
             while (!opcionP.equals("5")) {
 
@@ -143,13 +140,14 @@ public class Sistema {
 
                     default:
                         System.out.println("Opcion No valida!!");
+                        break;
                 }
             }
             sc.close();
 
-        } else {
-            System.out.println("Planficador no encontrado..");
         }
-    }
 
+    }
 }
+
+

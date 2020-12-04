@@ -23,7 +23,6 @@ public class Empresarial extends Evento {
 
    
     
-
     @Override
     public void mostrarMensaje() {
 

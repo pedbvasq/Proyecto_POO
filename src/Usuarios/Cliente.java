@@ -5,31 +5,51 @@ import Archivos.OrdenDePago;
 import Archivos.Solicitud;
 import Eventos.Evento;
 import Eventos.TipoEvento;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+/**
+ *
+ * @author pedro elias wiliam
+ */
 public class Cliente extends Usuario {
 
     private String telefono;
     private String correo;
     private static Date fechaEvento;
-    
-
     GregorianCalendar calend = new GregorianCalendar();
     static TipoEvento e;
-
+/**
+ * constructor que genera un objeto cliente
+ * @param telefono
+ * @param correo
+ * @param nombre
+ * @param apellido
+ * @param idUsuario
+ * @param contraseña
+ * @param tipo 
+ */
     public Cliente(String telefono, String correo, String nombre, String apellido, String idUsuario, String contraseña, char tipo) {
         super(nombre, apellido, idUsuario, contraseña, tipo);
         this.telefono = telefono;
         this.correo = correo;
     }
-
+/**
+ * constructor que genera un objeto cliente,sobreCarga de constructor
+ * @param nombre
+ * @param apellido
+ * @param idUsuario
+ * @param contraseña
+ * @param tipo 
+ */
     public Cliente(String nombre, String apellido, String idUsuario, String contraseña, char tipo) {
         super(nombre, apellido, idUsuario, contraseña, tipo);
     }
-
+/**
+ * recibe una opcion dada por el usario y convalida que esta cumpla con la condicion
+ * @param opcion 
+ */
     public void condicionEvento(String opcion) {
         String fecha;
 
@@ -52,7 +72,12 @@ public class Cliente extends Usuario {
         } while (validarTiempo(fecha, opcion) == false);
 
     }
-
+/**
+ * recibe una opcion y depndiendo de esa opcion ejecutara y devolvera un boolean
+ * @param fecha
+ * @param opcion
+ * @return 
+ */
     public Boolean validarTiempo(String fecha, String opcion) {
         Date fecha1 = convertirFecha(fecha);
         Date condicion;
@@ -60,7 +85,7 @@ public class Cliente extends Usuario {
         Date fechaActual = new Date();
 
         switch (opcion) {
-                         case "1":
+            case "1":
 
                 cal.setTime(fechaActual);
                 cal.add(cal.MONTH, 10);
@@ -89,7 +114,7 @@ public class Cliente extends Usuario {
                 cal.add(cal.DATE, 14);
                 condicion = cal.getTime();
                 if (fecha1.after(condicion)) {
-                    Cliente.fechaEvento =  fecha1;
+                    Cliente.fechaEvento = fecha1;
                     return true;
                 } else {
                     return false;
@@ -101,7 +126,11 @@ public class Cliente extends Usuario {
         return null;
 
     }
-
+/**
+ * crea , un archivo,objeto solicitud con los datos establecidos previamente
+ * @param opcion
+ * @param ev 
+ */
     public void crearSolicitud(String opcion, TipoEvento ev) {
         Date fechaActual = new Date();
         if (opcion.startsWith("s") || opcion.startsWith("S")) {
@@ -111,7 +140,7 @@ public class Cliente extends Usuario {
             String fecha1 = String.valueOf(fechaActual.getDay()) + "/" + String.valueOf(fechaActual.getMonth()) + "/" + String.valueOf(fechaActual.getYear());
             String total = codigo + "," + nameC + "," + planificador.nombre + "," + fecha1 + "," + Cliente.fechaEvento + "," + "Pendiente";
             ManejoArchivos.EscribirArchivo("solicitudes.txt", total);
-            Solicitud st = new Solicitud(codigo,this,planificador,fechaActual,fechaEvento,ev);
+            Solicitud st = new Solicitud(codigo, this, planificador, fechaActual, fechaEvento, ev);
             st.añadirSolicitud(st);
             System.out.print("/********** SOLICITUD REGISTRADA**********/\n" + "/*                                     */\n" + "/***************************************/\n");
             System.out.println("DATOS");
@@ -128,6 +157,9 @@ public class Cliente extends Usuario {
         }
 
     }
+/**
+ * crea un objeto pago y interactua con el usuario 
+ */
     public void registrarPago() {
         String opcion;
         String codTransaccion;
@@ -145,7 +177,13 @@ public class Cliente extends Usuario {
         System.out.println("Listo, se ha registrado cuando el planificador valide el se pondra en contacto con usted. ");
 
     }
-
+/**
+ * valida que el usario que ingreso es de tipo cliente,esto lo hace
+ * con los parametros
+ * @param usuario
+ * @param contraseña
+ * @return retorna el objeto
+ */
     public static Cliente validarCliente(String usuario, String contraseña) {
 
         for (Cliente i : clientes) {
@@ -157,6 +195,5 @@ public class Cliente extends Usuario {
         return null;
 
     }
-    
 
 }

@@ -4,7 +4,10 @@ package Archivos;
 import java.util.ArrayList;
 import java.util.Date;
 
-
+/***
+ * 
+ * @author pedro clase que contiene los atributos del pago
+ */ 
 public class OrdenDePago {
     private String codigoOrden;
     private String codigoTransaccion;
@@ -51,7 +54,13 @@ public class OrdenDePago {
     public static void setPagos(ArrayList<OrdenDePago> pagos) {
         OrdenDePago.pagos = pagos;
     }
-
+/**
+ * 
+ * @param codigoOrden
+ * @param codigoTransaccion
+ * @param fechaActual 
+ * creamos objeto pago con los parametros asignados
+ */
     public OrdenDePago(String codigoOrden, String codigoTransaccion, Date fechaActual) {
         this.codigoOrden = codigoOrden;
         this.codigoTransaccion = codigoTransaccion;
@@ -64,7 +73,10 @@ public class OrdenDePago {
         ManejoArchivos.EscribirArchivo("ordenPago.txt", linea);
         
     }
-    
+    /**
+     * 
+     * @param Pago recibe un objeto de tipo pago y se lo añade a una lista
+     */
     public void añadirPago(OrdenDePago Pago){
         pagos.add(Pago);
         

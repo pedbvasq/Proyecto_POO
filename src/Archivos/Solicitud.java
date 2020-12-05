@@ -1,5 +1,6 @@
 package Archivos;
 
+import Eventos.Evento;
 import Eventos.TipoEvento;
 import Usuarios.Cliente;
 import Usuarios.Planificador;
@@ -7,7 +8,10 @@ import Usuarios.Usuario;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
-
+/**
+ * 
+ * @author pedro
+ */
 public class Solicitud {
 
     private int idSolicitud;
@@ -19,16 +23,15 @@ public class Solicitud {
     private TipoEvento tipo;
     private Evento evento;
     private static ArrayList<Solicitud> solicitudes = new ArrayList<>();
-     ArrayList<String> solicitudesArchivo = ManejoArchivos.LeeFichero("solicitudes.txt");
+    ArrayList<String> solicitudesArchivo = ManejoArchivos.LeeFichero("solicitudes.txt");
     static Planificador p;
-    
-    
-    public Evento getEvento(){
+
+    public Evento getEvento() {
         return evento;
     }
-    
-    public void setEvento(Evento evento){
-        this.evento=evento;
+
+    public void setEvento(Evento evento) {
+        this.evento = evento;
     }
 
     public Solicitud(int idSolicitud, Cliente cliente, Planificador user, Date fechaSolicitud, Date fechaEvento, TipoEvento tipo) {
@@ -64,7 +67,6 @@ public class Solicitud {
     public void setTipo(TipoEvento tipo) {
         this.tipo = tipo;
     }
-
 
     public int getIdSolicitud() {
         return idSolicitud;
@@ -122,7 +124,8 @@ public class Solicitud {
 
     public static int generarID() {
         Random r = new Random();
-        return r.nextInt(1000-10000);
+        return r.nextInt(1000 - 10000);
+    }
 
     public void añadirSolicitud(Solicitud solicitud) {
 

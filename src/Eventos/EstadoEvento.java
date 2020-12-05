@@ -7,7 +7,7 @@ package Eventos;
 
 /**
  *
- * @author pedro
+ * @author pedro elias wiliam
  */
 public enum EstadoEvento {
     CONFIRMADO,PENDIENTE

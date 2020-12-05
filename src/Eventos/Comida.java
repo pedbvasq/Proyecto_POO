@@ -9,14 +9,16 @@ import java.util.Scanner;
 
 /**
  *
- * @author pedro
+ * @author pedro elias wiliam
  */
 public class Comida extends ElementoAdicional {
 
     private final int precioMenu = 15;
     //private double precioFinal;
     static Scanner sc = new Scanner(System.in);
-
+/**
+ * establece la cantidad dependiendo de lo que ingrese el usario
+ */
     @Override
     public void establecerCantidad() {
         int cantidad;

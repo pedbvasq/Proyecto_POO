@@ -3,7 +3,10 @@ package Eventos;
 
 import java.util.Scanner;
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author pedro elias wiliam
+ */ 
 public class Bebida extends ElementoAdicional {
 
     private final double Pwhisky = 50;
@@ -11,9 +14,11 @@ public class Bebida extends ElementoAdicional {
     private final double Pcerveza = 3;
     private final double Prefrescos = 1;
     
-    
-    
+  
     @Override
+    /**
+     *  establece la cantidad dependiendo de lo que ingrese el usario
+     */
     public void establecerCantidad() {
         int opcion;
         ArrayList<Integer> opcionesIngresadas= new ArrayList<>();

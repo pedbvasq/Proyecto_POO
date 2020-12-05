@@ -1,5 +1,7 @@
 package Eventos;
 
+import Usuarios.Cliente;
+import Usuarios.Planificador;
 import java.util.Date;
 import java.util.Random;
 import java.util.stream.IntStream;
@@ -40,6 +42,8 @@ public class Evento {
         this.hFin=hFin;
         
     }
+
+    
     
     //constructor con valores por defecto para crear evento cuando se crea la solicitud 
     public Evento(TipoEvento tipo, Date fecha, Cliente cl){
@@ -51,7 +55,18 @@ public class Evento {
         this.hInicio=null;
         this.hFin=null;
     }
-    
+    /**
+     * 
+     * @param tipo
+     * @param fecha
+     * @param codigo
+     * @param cl
+     * @param hInicio
+     * @param hFin
+     * @param capacidad
+     * @param desicion
+     * @param pl 
+     */
      public Evento(TipoEvento tipo, Date fecha, String codigo, Cliente cl, Date hInicio, Date hFin, int capacidad, char desicion,Planificador pl) {
         this.tipo = tipo;
         this.fecha = fecha;
@@ -63,53 +78,95 @@ public class Evento {
         this.desicion = desicion;
         this.pl = pl;
     }
+     /**
+      * 
+      * @return 
+      */
     public static ArrayList<Evento> getEventos() {
         return eventos;
     }
+    /**
+     * 
+     * @param tipo 
+     */
     public void setTipo(TipoEvento tipo){
         this.tipo=tipo;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public TipoEvento getTipo(){
         return tipo;
     }
-      
+      /**
+       * 
+       * @return 
+       */
     public double getTarifa(){
         return tarifa;
     }
-    
+    /**
+     * 
+     * @param fecha 
+     */
     public void setFecha(Date fecha){
         this.fecha=fecha;
     }
-    
+    /**
+     * 
+     * @return 
+     */
     public Date getFecha(){
         return fecha;
     }
-    
+    /**
+     * 
+     * @param codigo 
+     */
     public void setCodigo(String codigo){
         this.codigo=codigo;
     }
-    
+    /**
+     * 
+     * @return 
+     */
     public String getCodigo(){
         return codigo;
     }
-    
+    /**
+     * 
+     * @param capacidad 
+     */
     public void setCapacidad(int capacidad){
         this.capacidad=capacidad;
     }
-    
+    /**
+     * 
+     * @return 
+     */
     public int getCapacidad(){
         return capacidad;
     }
-    
+    /**
+     * 
+     * @param pl 
+     */
     public void setPlanificador(Planificador pl){
         this.pl=pl;
     }
-    
+    /**
+     * 
+     * @return 
+     */
     public Planificador getPlanificador(){
         return pl;
     }
-    
+    /**
+     * 
+     * @param hInicio 
+     */
     public void setInicio(Date hInicio){
         this.hInicio=hInicio;
     }
@@ -211,26 +268,39 @@ public class Evento {
         }
     }    
     
-
+/**
+ * 
+ * @return 
+ */
     @Override
     public String toString(){
         String linea = codigo+"," + cl.getNombre()+","+sTipo+","+hInicio+","+hFin+","+capacidad+","+pl+","+estado;
         return linea;
     }
-    
+    /**
+     * 
+     * @return 
+     */
     public double calcularCostoAdicionales(){
         
         double costoAdicionales = comida.getPrecioFinal()+bebida.getPrecioFinal()+musica.getPrecioFinal()+fotografia.getPrecioFinal()+bocaditos.getPrecioFinal();
         return costoAdicionales;
     }
-    
+    /**
+     * 
+     * @return 
+     */
     public double calcularCostoTotal(){
         double costoTotal=this.tarifa+this.calcularCostoAdicionales();
         return costoTotal;
     }
-    
+    /**
+     * 
+     * @param ev 
+     */
     public static void agregarEvento(Evento ev) {
         eventos.add(ev);
     }
+   
 }
     

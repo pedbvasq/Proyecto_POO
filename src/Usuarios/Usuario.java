@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ *
+ * @author pedro elias wiliam
+ */
 public class Usuario {
 
     protected String nombre;
@@ -23,6 +27,15 @@ public class Usuario {
     public Usuario() {
     }
 
+    /**
+     * constructor que crea un objeto de usuario
+     *
+     * @param nombre
+     * @param apellido
+     * @param idUsuario
+     * @param contraseña
+     * @param tipo
+     */
     public Usuario(String nombre, String apellido, String idUsuario, String contraseña, char tipo) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -71,6 +84,14 @@ public class Usuario {
         this.tipo = tipo;
     }
 
+    /**
+     * valida con los parametros establecidos que la pèrsona que ingresa este
+     * registrada
+     *
+     * @param usuario
+     * @param contraseña
+     * @return retorna un bollean
+     */
     public static boolean validarUsuario(String usuario, String contraseña) {
 
         for (Usuario i : listaUsuarios()) {
@@ -83,6 +104,12 @@ public class Usuario {
         return false;
     }
 
+    /**
+     * convierte un string a una fecha
+     *
+     * @param fecha
+     * @return retorna la fecha
+     */
     public Date convertirFecha(String fecha) {
 
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -95,6 +122,12 @@ public class Usuario {
         return fechaDate;
     }
 
+    /**
+     * internamente usa un archivo que contiene usarios y los devuleve en una
+     * lista
+     *
+     * @return
+     */
     public static ArrayList<Usuario> listaUsuarios() {
         ArrayList<String> clientePlanificador = ManejoArchivos.LeeFichero("usuarios.txt");
 
@@ -127,6 +160,13 @@ public class Usuario {
 
     }
 
+    /**
+     * devuelve el tipo de usuario
+     *
+     * @param usuario
+     * @param contraseña
+     * @return
+     */
     public static char tipo(String usuario, String contraseña) {
         for (Usuario i : listaUsuarios()) {
             if (i.getIdUsuario().equals(usuario) && i.contraseña.equals(contraseña)) {
@@ -134,3 +174,6 @@ public class Usuario {
 
             }
         }
+        return 0;
+    }
+}

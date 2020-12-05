@@ -6,18 +6,34 @@ import Usuarios.Planificador;
 import Usuarios.Usuario;
 import java.util.Scanner;
 
+/**
+ * Esta clase corre el programa
+ *
+ * @author pedro
+ */
 public class Sistema {
-
+    
+    /**
+     *
+     */
     static Scanner sc = new Scanner(System.in);
-
+    
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         //Llamada menu
         Sistema main = new Sistema();
-
+        
         main.menu();
-
+        
     }
 
+    /**
+     *
+     *  muestra el menu
+     */
     public void menu() {
         System.out.println("++++++++++++++++++++++++++++++++++++++++++++++\n"
                 + "          BIENVENIDO AL SISTEMA\n" + "++++++++++++++++++++++++++++++++++++++++++++++");
@@ -28,14 +44,14 @@ public class Sistema {
             usuario = sc.nextLine();
             System.out.print("CONTRASEÑA:");
             contraseña = sc.nextLine();
-
+            
         } while (Usuario.validarUsuario(usuario, contraseña) == false); //validando credenciales
-        
-            //pregunto si cliente o planificador
+
+        //pregunto si cliente o planificador
         if (String.valueOf(Usuario.tipo(usuario, contraseña)).equals("C")) {
             String opcionC = "";
             Cliente Cl = Cliente.validarCliente(usuario, contraseña);
-
+            
             while (!opcionC.equals("3")) {
                 System.out.println("╔                Menu                       ");
                 System.out.println("║ 1.Solicitar planificación de evento                   ║");
@@ -66,25 +82,25 @@ public class Sistema {
                                     opcionSoli = sc.nextLine().toLowerCase();
                                     Cl.crearSolicitud(opcionSoli, TipoEvento.BODA);
                                     break;
-
+                                
                                 case "2":
                                     Cl.condicionEvento("2");
                                     System.out.println("¿Desea ingresar su solicitud ?");
                                     opcionSoli = sc.nextLine().toLowerCase();
                                     Cl.crearSolicitud(opcionSoli, TipoEvento.INFANTIL);
                                     break;
-
+                                
                                 case "3":
                                     Cl.condicionEvento("3");
                                     System.out.println("¿Desea ingresar su solicitud ?");
                                     opcionSoli = sc.nextLine().toLowerCase();
                                     Cl.crearSolicitud(opcionSoli, TipoEvento.INFANTIL);
                                     break;
-
+                                
                                 case "4":
                                     System.out.println("Regresando...");
                                     break;
-
+                                
                                 default:
                                     System.out.println("Opcion No valida!!");
                             }
@@ -92,27 +108,27 @@ public class Sistema {
                         //sc.close();
                         
                         break;
-
+                    
                     case "2":
                         Cl.registrarPago();
-
+                        
                         break;
                     case "3":
                         opcionC = "3";
                         break;
-
+                    
                     default:
                         System.out.println("Opcion No valida!!");
                 }
             }
             sc.close();
-
+            
         } else {
-
+            
             Planificador Pl = Planificador.validarCliente(usuario, contraseña);
             String opcionP = "";
             while (!opcionP.equals("5")) {
-
+                
                 System.out.println("╔                Menu                       ");
                 System.out.println("║ 1.Consultar solicitudes pendientes                   ║");
                 System.out.println("║ 2.Registrar  evento                  ");
@@ -123,31 +139,33 @@ public class Sistema {
                 opcionP = sc.nextLine();
                 switch (opcionP) {
                     case "1":
-
+                        Pl.ConsultarSolicitudesPendientes();
+                        
                         break;
                     case "2":
-
+                        Pl.registrarEvento();
+                        
                         break;
                     case "3":
-
+                        Pl.confirmarEvento();
+                        
                         break;
                     case "4":
-
+                        Pl.ConsultarEvento(opcionP);
+                        
                         break;
                     case "5":
                         opcionP = "5";
                         break;
-
+                    
                     default:
                         System.out.println("Opcion No valida!!");
                         break;
                 }
             }
             sc.close();
-
+            
         }
-
+        
     }
 }
-
-

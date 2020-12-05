@@ -5,10 +5,17 @@ package Archivos;
 
 import java.io.*;
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author pedro elias william
+ */
 
 public class ManejoArchivos {
-
+/**
+ * 
+ * @param nombrearchivo
+ * @return leemos el archivo y nos regresa una lista 
+ */
     public static ArrayList<String> LeeFichero(String nombrearchivo) {
         ArrayList<String> lineas = new ArrayList<>();
         File archivo = null;
@@ -47,7 +54,12 @@ public class ManejoArchivos {
         return lineas;
 
     }
-
+/**
+ * 
+ * @param nombreArchivo ingresamos el nombre  que se desea dar al archivo que posteriormente
+ * sera creado
+ * @param linea  el texto que se desea colocar en el arvhivo
+ */
     public static void EscribirArchivo(String nombreArchivo, String linea) {
 
         FileWriter fichero = null;

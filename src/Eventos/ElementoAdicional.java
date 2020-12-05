@@ -1,9 +1,14 @@
 
 package Eventos;
 
+import java.util.Scanner;
+/**
+ * 
+ * @author pedro elias wiliam
+ */
 public abstract class ElementoAdicional {
     
-    
+    static Scanner sc = new Scanner(System.in);
     private int cantidad;
     private double precioFinal;//precio total a pagar 
     
@@ -23,6 +28,8 @@ public abstract class ElementoAdicional {
     public void setPrecioFinal(double precio) {
         this.precioFinal = precio;
     }
-    
+    /**
+     * metodo estatico 
+     */
     public abstract void establecerCantidad();
 }

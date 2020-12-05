@@ -4,6 +4,10 @@ package Eventos;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+/**
+ * 
+ * @author pedro
+ */
 public class Musica extends ElementoAdicional {
     private final double precioDj = 300;
     private final double precioBanda = 2000;

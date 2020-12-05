@@ -57,6 +57,12 @@ public class OrdenDePago {
         this.codigoTransaccion = codigoTransaccion;
         this.fechaActual = fechaActual;
         this.estado = estado.PENDIENTEPAGO;
+        String cod_evento = Evento.generarCodigo();
+        
+        String linea = codigoOrden + "," + cod_evento + "," + estado + "," + codigoTransaccion + "," + fechaActual;
+        String ordenPago;
+        ManejoArchivos.EscribirArchivo("ordenPago.txt", linea);
+        
     }
     
     public void añadirPago(OrdenDePago Pago){

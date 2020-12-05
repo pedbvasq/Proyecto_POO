@@ -4,17 +4,17 @@ import Archivos.Estado;
 import Archivos.ManejoArchivos;
 import Archivos.OrdenDePago;
 import Archivos.Solicitud;
-import Eventos.Evento;
-import Eventos.TipoEvento;
-import static Eventos.TipoEvento.BODA;
-import static Eventos.TipoEvento.EMPRESARIAL;
-import static Eventos.TipoEvento.INFANTIL;
+//import Eventos.Evento;
+//import Eventos.TipoEvento;
+//import static Eventos.TipoEvento.BODA;
+//import static Eventos.TipoEvento.EMPRESARIAL;
+//import static Eventos.TipoEvento.INFANTIL;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
-import java.util.Scanner;
 
 public class Planificador extends Usuario {
 
@@ -55,7 +55,7 @@ public class Planificador extends Usuario {
                 System.out.println("FECHA DE REGISTRO: " + i.getFechaEvento());
                 System.out.println("TIPO: ");
                 System.out.println("FECHA DEL EVENTO: " + i.getFechaEvento());
-                switch (i.getTipo()) {
+                switch (i.getEvento().getTipo()) {
                     case BODA:
                         System.out.println("Precio Base: 3500");
 
@@ -66,10 +66,11 @@ public class Planificador extends Usuario {
                         System.out.println("Precio Base: 300");
 
                 }
+            
             }
-
+            
         }
-
+        sc.close();
     }
 
     public void confirmarEvento() {
@@ -93,13 +94,13 @@ public class Planificador extends Usuario {
 
         switch (opcion) {
             case "1":
-                System.out.println("Tiene " + filtro(BODA) + " Fiestas infantiles asigandas");
+                System.out.println("Tiene " + filtro(TipoEvento.BODA) + " Fiestas infantiles asigandas");
 
             case "2":
-                System.out.println("Tiene " + filtro(INFANTIL) + " Fiestas infantiles asigandas");
+                System.out.println("Tiene " + filtro(TipoEvento.INFANTIL) + " Fiestas infantiles asigandas");
 
             case "3":
-                System.out.println("Tiene " + filtro(EMPRESARIAL) + " Fiesta empresarial asiganda");
+                System.out.println("Tiene " + filtro(TipoEvento.EMPRESARIAL) + " Fiesta empresarial asiganda");
 
             default:
                 System.out.println("Opcion invalida!!!!");
@@ -112,7 +113,7 @@ public class Planificador extends Usuario {
         int acum = 0;
         ArrayList<Evento> eventos = Evento.getEventos();
         for (Evento e : eventos) {
-            if (e.getCodigo().getClass().equals(evento)) {
+            if (e.getCodigo().getClass().equals(evento.getClass())) {
                 if (e.getPlanificador().nombre.contentEquals(this.nombre)) {
                     acum++;
 
@@ -128,13 +129,13 @@ public class Planificador extends Usuario {
     public void crearEvento(Date horaInicio, Date horaFin, int capacidad, char desicion) {
         ArrayList<Solicitud> solicitudes = Solicitud.getSolicitudes();
         for (Solicitud i : solicitudes) {
-            Evento evento = new Evento(i.getTipo(), i.getFechaEvento(), Evento.generarCodigo(), i.getCliente(), horaInicio, horaFin, capacidad, desicion, i.getUser());
+            Evento evento = new Evento(i.getEvento().getTipo(), i.getFechaEvento(), i.getEvento().generarCodigo(), i.getCliente(), horaInicio, horaFin, capacidad, desicion, i.getUser());
             Evento.agregarEvento(evento);
 
         }
 
     }
-
+/*
     public static Planificador validarCliente(String usuario, String contraseña) {
         for (Planificador i : planificadores) {
             if (i.getIdUsuario().equals(usuario) && i.getContraseña().equals(contraseña)) {
@@ -144,8 +145,9 @@ public class Planificador extends Usuario {
         }
         return null;
 
-    }
-   public void registroDatosEvento(Solicitud solicitud){
+    }*/
+    
+    public void registroDatosEvento(Solicitud solicitud){
         Scanner sc = new Scanner(System.in);
         DateFormat hora = new SimpleDateFormat("HH:mm:ss");
         try{
@@ -167,6 +169,12 @@ public class Planificador extends Usuario {
             Planificador.registrarAdicionales(solicitud);
         
         }while(!descicion.equals("n"));
+        if (descicion.equals("n")){
+            System.out.println("Ha concluido el ingreso de los datos del evento.\n"+"El costo total de sus evento sera: "+ solicitud.getEvento().calcularCostoTotal()+" dólares.");
+            System.out.println("Desea generar su orden de pago?(S/N):");
+            String comprobar=sc.nextLine().toLowerCase();
+            if(comprobar.equals("s")){Planificador.generarOrdenDePago(solicitud, descicion);}
+        }
     }
     
     public static void registrarAdicionales(Solicitud solicitud){
@@ -245,4 +253,26 @@ public class Planificador extends Usuario {
                 }
             }while(opcion!=6);
         }
+    
+    public static void generarOrdenDePago(Solicitud solicitud, String codigoTransaccion){
+    System.out.println("/********** ORDEN DE PAGO **********/\n" + "/*  "
+                + "                                   */\n" + "/***************************************/\n");
+    Date actual = new Date();
+    
+    String code = Evento.generarCodigo();
+    OrdenDePago orden = new OrdenDePago(code,codigoTransaccion,actual);
+    System.out.println("FECHA: "+actual);
+    System.out.println("CLIENTE: "+solicitud.getEvento().getCliente().getNombre()+" "+solicitud.getEvento().getCliente().getApellido());
+    System.out.println("EVENTO: "+solicitud.getEvento().getTipo());
+    System.out.println("FECHA EVENTO: "+solicitud.getEvento().getFecha());
+    
+    System.out.println("ADICIONALES: ");
+    if (solicitud.getEvento().getComida().getCantidad()!=0){System.out.println("COMIDA");}
+    if (solicitud.getEvento().getBocaditos().getCantidad()!=0){System.out.println("BOCADITOS");}
+    if (solicitud.getEvento().getMusica().getCantidad()!=0){System.out.println("MUSICA "+solicitud.getEvento().getMusica().getTipo());}
+    if (solicitud.getEvento().getMusica().getCantidad()==2){System.out.println("MUSICA "+solicitud.getEvento().getMusica().getTipo1()+"\nMUSICA "+solicitud.getEvento().getMusica().getTipo2());}
+    if (solicitud.getEvento().getBebida().getCantidad()!=0){System.out.println("BEBIDAS");}
+    System.out.println("TOTAL A PAGAR: "+ solicitud.getEvento().calcularCostoTotal());
+    }
 }
+

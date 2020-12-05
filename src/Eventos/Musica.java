@@ -2,6 +2,7 @@
 package Eventos;
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Musica extends ElementoAdicional {
     private final double precioDj = 300;
@@ -18,6 +19,8 @@ public class Musica extends ElementoAdicional {
     @Override
     public void establecerCantidad() {
         int opcion;
+        ArrayList<Integer> opcionesAgregadas = new ArrayList<>();
+        
         do{
             
             Scanner sc = new Scanner(System.in);
@@ -25,23 +28,28 @@ public class Musica extends ElementoAdicional {
             System.out.println("Musica Disponible : \n" + "1.Dj($300)" + "2.Banda($2000)"+"3.Omitir");
             System.out.println("¿Que prefiere?");
             opcion =sc.nextInt();
-            switch (opcion){
-                case 1:
-                    this.setCantidad(this.getCantidad()+1);
-                    contadorPrecio+=precioDj;
-                    this.tipo="DJ";
-                    this.tipo1="DJ";
-                    break;
-                case 2:
-                    this.setCantidad(this.getCantidad()+1);
-                    contadorPrecio+=precioBanda;
-                    this.tipo="BANDA";
-                    this.tipo2="BANDA";
-                    break;
-                case 3:
-                    break;
-            } 
+            if(!opcionesAgregadas.contains(opcion)){
+                opcionesAgregadas.add(opcion);
+                switch (opcion){
+                    case 1:
+                        this.setCantidad(this.getCantidad()+1);
+                        contadorPrecio+=precioDj;
+                        this.tipo="DJ";
+                        this.tipo1="DJ";
+                        break;
+                    case 2:
+                        this.setCantidad(this.getCantidad()+1);
+                        contadorPrecio+=precioBanda;
+                        this.tipo="BANDA";
+                        this.tipo2="BANDA";
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        System.out.println("¡Opcion no válida!");
+                } 
             sc.close();
+            }else{System.out.println("Opcion ya ingresada. Intente nuevamente.");}
         }while (opcion!=3||this.getCantidad()!=2);
         
     }    

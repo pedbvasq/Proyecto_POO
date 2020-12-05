@@ -42,7 +42,7 @@ public class Musica extends ElementoAdicional {
                     break;
             } 
             sc.close();
-        }while (opcion!=3&&this.getCantidad()!=2);
+        }while (opcion!=3||this.getCantidad()!=2);
         
     }    
 }

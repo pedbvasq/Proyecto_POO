@@ -1,6 +1,7 @@
 
 package Archivos;
 
+import Eventos.Evento;
 import java.util.ArrayList;
 import java.util.Date;
 
